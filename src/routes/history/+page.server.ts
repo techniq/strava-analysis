@@ -20,7 +20,7 @@ export async function load({ parent, url, setHeaders }) {
   });
 
   return {
-    allActivities: Promise.allSettled(
+    activities: Promise.allSettled(
       range(totalPages).map((x) =>
         strava.api('/athlete/activities', { data: { page: x + 1, per_page } })
       )
