@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiExitRun, mdiHome, mdiPeriodicTable } from '@mdi/js';
+  import { mdiExitRun, mdiFinance, mdiHome, mdiTimelineClockOutline } from '@mdi/js';
 
   import { Button, Dialog, NavItem, Toggle, Tooltip } from 'svelte-ux';
 
@@ -41,4 +41,10 @@
 <NavItem text="Home" icon={mdiHome} path="/" currentUrl={$page.url} class="mt-2" />
 
 <h2>Analysis</h2>
-<NavItem text="Activities" icon={mdiPeriodicTable} path="/activities" currentUrl={$page.url} />
+<NavItem
+  text="Activities"
+  icon={mdiTimelineClockOutline}
+  path="/activities"
+  currentUrl={$page.url}
+/>
+<NavItem text="History" icon={mdiFinance} path="/history" currentUrl={$page.url} />
