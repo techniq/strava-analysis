@@ -67,9 +67,6 @@
       <Table
         data={data.activities}
         columns={[
-          // {
-          //   name: 'id'
-          // },
           {
             name: 'sport_type',
             header: 'Type',
@@ -77,9 +74,6 @@
               data: 'w-[80px]'
             }
           },
-          // {
-          //   name: 'workout_type'
-          // },
           {
             name: 'name',
             header: 'Name',
@@ -110,7 +104,18 @@
           {
             name: 'distance',
             header: 'Distance',
-            format: (value) => format(value / 1609, 'decimal') + 'mi',
+            format: (value) => format(value / 1609, 'decimal') + ' mi',
+            align: 'right',
+            dataBackground: {
+              color: 'var(--color-blue-100)',
+              inset: [1, 2],
+              tweened: { duration: 300 }
+            }
+          },
+          {
+            name: 'total_elevation_gain',
+            header: 'Elevation',
+            format: (value) => format(value * 3.281, 'integer') + ' ft',
             align: 'right',
             dataBackground: {
               color: 'var(--color-blue-100)',
@@ -137,19 +142,6 @@
               tweened: { duration: 300 }
             }
           },
-          // {
-          //   name: 'elapsed_time'
-          // },
-          // {
-          //   name: 'total_elevation_gain'
-          // },
-
-          // {
-          //   name: 'start_latlng'
-          // },
-          // {
-          //   name: 'end_latlng'
-          // },
 
           // {
           //   name: 'average_speed'
@@ -157,6 +149,13 @@
           // {
           //   name: 'average_cadence'
           // },
+          // {
+          //   name: 'start_latlng'
+          // },
+          // {
+          //   name: 'end_latlng'
+          // },
+
           {
             name: 'Heartrate',
             align: 'center',
