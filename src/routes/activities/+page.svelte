@@ -1,17 +1,21 @@
 <script lang="ts">
-  import { mdiAccount, mdiPlay } from '@mdi/js';
+  import { mdiAccount, mdiFlagCheckered, mdiPlay } from '@mdi/js';
 
   import {
     AppBar,
     Button,
     Card,
     Duration,
+    Pagination,
     PeriodType,
     Table,
     TextField,
     dateDisplay,
     format,
-    tableCell
+    tableCell,
+    paginationStore,
+    changeStore,
+    Icon
   } from 'svelte-ux';
   import { getCellValue, getCellContent } from 'svelte-ux/utils/table';
 
@@ -19,22 +23,36 @@
 
   export let data;
 
-  let athlete = data.variables.athlete;
+  let athleteId = data.params.athleteId;
+
+  const pagination = paginationStore({
+    total:
+      data.stats.all_run_totals.count +
+      data.stats.all_ride_totals.count +
+      data.stats.all_swim_totals.count,
+    page: Number(data.params.page),
+    perPage: Number(data.params.per_page)
+  });
 
   function run() {
     const params = new URLSearchParams();
-    params.set('athlete', athlete);
+    // params.set('athlete', athleteId);
+    params.set('page', $pagination.page.toString());
+    params.set('per_page', $pagination.perPage.toString());
     goto(`?${params}`);
   }
+
+  const paginationChange = changeStore(pagination, run);
+  $paginationChange; // must subscribe to fire change events
 </script>
 
 <AppBar title="Activities" />
 
 <main>
-  <form class="flex gap-2 bg-white border-b p-4" on:submit|preventDefault={run}>
+  <!-- <form class="flex gap-2 bg-white border-b p-4" on:submit|preventDefault={run}>
     <TextField
       label="Athlete"
-      bind:value={athlete}
+      bind:value={athleteId}
       icon={mdiAccount}
       dense
       placeholder="Pick an athlete"
@@ -42,7 +60,7 @@
       class="flex-1"
     />
     <Button type="submit" icon={mdiPlay} variant="fill" color="blue">Run</Button>
-  </form>
+  </form> -->
 
   <div class="relative min-h-[56px] p-4">
     <Card class="px-3 overflow-auto">
@@ -212,6 +230,12 @@
           {/each}
         </tbody>
       </Table>
+      <Pagination
+        {pagination}
+        perPageOptions={[10, 25, 100, 200]}
+        show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+        classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+      />
     </Card>
   </div>
 </main>

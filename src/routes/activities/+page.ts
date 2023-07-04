@@ -1,20 +1,21 @@
 import { Strava } from '$lib/api.js';
 
 export async function load({ parent, url }) {
-  const { accessToken } = await parent();
+  const { accessToken, athlete } = await parent();
 
-  const athlete = url.searchParams.get('athlete') ?? 'techniq';
+  const athleteId = Number(url.searchParams.get('athlete')) || athlete.id;
+  const per_page = url.searchParams.get('per_page') ?? 25;
+  const page = url.searchParams.get('page') ?? 1;
 
-  const variables = { athlete };
+  const strava = new Strava(accessToken);
 
   return {
-    activities: fetchActivities(accessToken, variables),
-    variables
+    activities: strava.api('/athlete/activities', { data: { per_page, page } }),
+    stats: strava.api(`/athletes/${athleteId}/stats`),
+    params: {
+      athleteId,
+      per_page,
+      page
+    }
   };
-}
-
-async function fetchActivities(accessToken: string, variables: { athlete: string }) {
-  const strava = new Strava(accessToken);
-  // return strava.api('/athlete/activities', { data: { per_page: 200 } });
-  return strava.api('/athlete/activities', { data: { per_page: 50 } });
 }
