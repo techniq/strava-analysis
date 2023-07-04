@@ -63,7 +63,7 @@
   </form> -->
 
   <div class="relative min-h-[56px] p-4">
-    <Card class="px-3 overflow-auto">
+    <Card class="overflow-auto">
       <Table
         data={data.activities}
         columns={[
@@ -196,7 +196,7 @@
           }
         ]}
         classes={{
-          th: 'px-2',
+          th: 'px-2 bg-orange-100 border-b border-r border-orange-200 text-orange-800 text-sm',
           td: 'px-2 whitespace-nowrap tabular-nums'
         }}
       >

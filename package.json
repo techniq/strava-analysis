@@ -17,6 +17,7 @@
     "@types/cookies": "^0.7.7",
     "@types/d3-array": "^3.0.5",
     "@types/d3-scale": "^4.0.3",
+    "@types/d3-time": "^3.0.0",
     "autoprefixer": "^10.4.14",
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
@@ -33,8 +34,9 @@
     "@mdi/js": "^7.2.96",
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
+    "d3-time": "^3.1.0",
     "date-fns": "^2.30.0",
-    "layerchart": "^0.17.2",
+    "layerchart": "^0.18.0",
     "svelte-ux": "^0.43.4"
   }
 }

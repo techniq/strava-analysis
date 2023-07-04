@@ -1,6 +1,7 @@
 <script lang="ts">
   import { cumsum, extent, flatRollup, group, rollup, zip } from 'd3-array';
   import { scaleBand, scaleTime } from 'd3-scale';
+  import { timeMonth, timeYear } from 'd3-time';
   import { format } from 'date-fns';
 
   import { AppBar, Card, PeriodType, ToggleGroup, ToggleOption, formatDate } from 'svelte-ux';
@@ -19,7 +20,7 @@
 
   export let data;
 
-  let selectedTab = 'overview';
+  let selectedTab: 'overview' | 'cumulative' | 'yearly' = 'overview';
 
   $: activities = data.activities.sort(createPropertySortFunc('start_date'));
   $: startDateExtent = extent(activities, (d) => d.start_date);
@@ -77,25 +78,28 @@
   <div class="grid gap-4 p-4">
     {#each [...activitiesBySportType] as [type, data]}
       <Card title={type} class="h-[300px]">
-        {#if selectedTab === 'yearly'}
+        {#if selectedTab === 'overview'}
           <Chart
-            data={data.valuesByYear.flatMap((d) => d[1].values)}
-            x="start_date"
-            xScale={scaleTime()}
-            _xScale={scaleBand().padding(0.4)}
-            xDomain={startDateExtent}
-            y={(d) => d.totalDistance / 1609}
+            data={data.values}
+            x={(d) => timeMonth(d.start_date)}
+            xScale={scaleBand().padding(0.1)}
+            xDomain={timeMonth.range(...startDateExtent)}
+            y={(d) => (selectedTab === 'overview' ? d.distance : d.totalDistance) / 1609}
             yDomain={[0, null]}
             yNice
             padding={{ left: 32, bottom: 24, right: 16 }}
-            tooltip={{ mode: 'bisect-x', snapToDataX: true, snapToDataY: true }}
+            tooltip={{ mode: 'voronoi', snapToDataX: true, snapToDataY: true }}
           >
             <Svg>
-              <Axis placement="left" grid rule format="metric" />
-              <Axis placement="bottom" rule />
-              {#each data.valuesByYear as [year, yearData]}
-                <Area data={yearData.values} line={{ width: 2 }} tweened />
-              {/each}
+              <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
+              <Axis
+                placement="bottom"
+                grid
+                rule
+                ticks={timeYear.range(...startDateExtent)}
+                format={(d) => formatDate(d, PeriodType.CalendarYear)}
+              />
+              <Bars class="fill-blue-500/10" />
               <HighlightLine color="var(--color-blue-500)" />
             </Svg>
             <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
@@ -113,7 +117,7 @@
               />
             </Tooltip>
           </Chart>
-        {:else}
+        {:else if selectedTab === 'cumulative'}
           <Chart
             data={data.values}
             x="start_date"
@@ -127,12 +131,44 @@
             tooltip={{ mode: 'bisect-x', snapToDataX: true, snapToDataY: true }}
           >
             <Svg>
-              <Axis placement="left" grid rule format="metric" />
-              <Axis placement="bottom" rule />
-              {console.log({ data })}
-              <Area line={{ width: 2 }} tweened />
-              <!-- <Bars /> -->
-              <!-- <Points /> -->
+              <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
+              <Axis placement="bottom" grid rule />
+              <Area line={{ width: 2 }} />
+              <HighlightLine color="var(--color-blue-500)" />
+            </Svg>
+            <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
+              <TooltipItem
+                label="Distance"
+                value={data.distance / 1609}
+                format="decimal"
+                valueAlign="right"
+              />
+              <TooltipItem
+                label="Total Distance"
+                value={data.totalDistance / 1609}
+                format="decimal"
+                valueAlign="right"
+              />
+            </Tooltip>
+          </Chart>
+        {:else if selectedTab === 'yearly'}
+          <Chart
+            data={data.valuesByYear.flatMap((d) => d[1].values)}
+            x="start_date"
+            xScale={scaleTime()}
+            xDomain={startDateExtent}
+            y={(d) => d.totalDistance / 1609}
+            yDomain={[0, null]}
+            yNice
+            padding={{ left: 32, bottom: 24, right: 16 }}
+            tooltip={{ mode: 'bisect-x', snapToDataX: true, snapToDataY: true }}
+          >
+            <Svg>
+              <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
+              <Axis placement="bottom" grid rule />
+              {#each data.valuesByYear as [year, yearData]}
+                <Area data={yearData.values} line={{ width: 2 }} />
+              {/each}
               <HighlightLine color="var(--color-blue-500)" />
             </Svg>
             <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
