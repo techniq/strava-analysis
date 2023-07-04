@@ -1,5 +1,6 @@
 export async function load({ locals }) {
   return {
-    accessToken: locals.accessToken
+    accessToken: locals.accessToken,
+    athlete: locals.athlete
   };
 }
