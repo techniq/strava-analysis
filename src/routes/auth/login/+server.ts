@@ -1,13 +1,13 @@
 import { redirect } from '@sveltejs/kit';
-import { baseUrl, clientId } from '../_config';
+import { BASE_URL, STRAVA_CLIENT_ID } from '$env/static/private';
 
 // https://developers.strava.com/docs/authentication/
 
 export function GET() {
   const params = new URLSearchParams();
-  params.append('client_id', clientId);
+  params.append('client_id', STRAVA_CLIENT_ID);
   params.append('response_type', 'code');
-  params.append('redirect_uri', `${baseUrl}/auth/callback`);
+  params.append('redirect_uri', `${BASE_URL}/auth/callback`);
   params.append('approval_prompt', 'auto');
   params.append('scope', 'read_all,profile:read_all,activity:read_all');
 

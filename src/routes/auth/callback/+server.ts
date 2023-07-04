@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import type { CookieSerializeOptions } from 'cookie';
 
-import { baseUrl, clientId, clientSecret } from '../_config';
+import { BASE_URL, STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET } from '$env/static/private';
 
 // https://developers.strava.com/docs/authentication
 
@@ -16,7 +16,7 @@ export async function GET({ url, locals, cookies }) {
   const cookieOptions = {
     path: '/',
     httpOnly: true,
-    secure: baseUrl.startsWith('https://')
+    secure: BASE_URL.startsWith('https://')
   } as CookieSerializeOptions;
 
   cookies.set('athlete', athlete.id || '', cookieOptions);
@@ -33,8 +33,8 @@ async function getAccessToken(code: string) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({
-      client_id: clientId,
-      client_secret: clientSecret,
+      client_id: STRAVA_CLIENT_ID,
+      client_secret: STRAVA_CLIENT_SECRET,
       code,
       grant_type: 'authorization_code'
     })
