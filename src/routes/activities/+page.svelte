@@ -45,15 +45,12 @@
   </form>
 
   <div class="relative min-h-[56px] p-4">
-    <Card class="px-3">
+    <Card class="px-3 overflow-auto">
       <Table
         data={data.activities}
         columns={[
           // {
           //   name: 'id'
-          // },
-          // {
-          //   name: 'type'
           // },
           {
             name: 'sport_type',
@@ -64,7 +61,11 @@
           // },
           {
             name: 'name',
-            header: 'Name'
+            header: 'Name',
+            format: (value, rowData) => {
+              return `<a href="https://www.strava.com/activities/${rowData.id}" target="_blank" class="underline">${value}</a>`;
+            },
+            html: true
           },
           {
             name: 'start_date',
@@ -99,6 +100,16 @@
               tweened: { duration: 300 }
             }
           },
+          {
+            name: 'pace',
+            header: 'Pace',
+            value: (d) => (d.distance ? Math.round(d.moving_time / (d.distance / 1609)) : null),
+            dataBackground: {
+              color: 'var(--color-blue-100)',
+              inset: [1, 2],
+              tweened: { duration: 300 }
+            }
+          },
           // {
           //   name: 'elapsed_time'
           // },
@@ -126,7 +137,7 @@
               {
                 name: 'average_heartrate',
                 header: 'Avg',
-                format: (value) => `${value} bpm`,
+                format: (value) => (value ? `${value} bpm` : ''),
                 align: 'right',
                 class: {
                   data: 'w-[100px]'
@@ -134,13 +145,14 @@
                 dataBackground: {
                   color: 'var(--color-red-100)',
                   inset: [1, 2],
-                  tweened: { duration: 300 }
+                  tweened: { duration: 300 },
+                  domain: [120, 160]
                 }
               },
               {
                 name: 'max_heartrate',
                 header: 'Max',
-                format: (value) => `${value} bpm`,
+                format: (value) => (value ? `${value} bpm` : ''),
                 align: 'right',
                 class: {
                   data: 'w-[100px]'
@@ -148,7 +160,8 @@
                 dataBackground: {
                   color: 'var(--color-red-100)',
                   inset: [1, 2],
-                  tweened: { duration: 300 }
+                  tweened: { duration: 300 },
+                  domain: [150, 180]
                 }
               }
             ]
@@ -166,7 +179,7 @@
         ]}
         classes={{
           th: 'px-2',
-          td: 'px-2'
+          td: 'px-2 whitespace-nowrap tabular-nums'
         }}
       >
         <tbody slot="data" let:columns let:data>
@@ -176,13 +189,22 @@
                 {@const value = getCellValue(column, rowData, rowIndex)}
                 {@const content = getCellContent(column, rowData, rowIndex)}
 
-                {#if column.name === 'moving_time' || column.name === 'elapsed_time'}
+                {#if column.name === 'moving_time' || column.name === 'elapsed_time' || column.name === 'pace'}
                   <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
-                    <Duration duration={{ seconds: value }} />
+                    {#if value}
+                      <Duration duration={{ seconds: value }} />
+                    {/if}
+                  </td>
+                {:else if column.name === 'sport_type'}
+                  <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+                    {@html content}
+                    {#if rowData.workout_type === 1}
+                      <Icon data={mdiFlagCheckered} />
+                    {/if}
                   </td>
                 {:else}
                   <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
-                    {content}
+                    {@html content}
                   </td>
                 {/if}
               {/each}

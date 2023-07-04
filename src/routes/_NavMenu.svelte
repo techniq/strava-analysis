@@ -6,7 +6,7 @@
   import { athlete } from '$lib/stores';
   import { page } from '$app/stores';
 
-  $: console.log($athlete);
+  $: console.log({ $athlete });
 </script>
 
 <NavItem currentUrl={$page.url} class="pl-4 border-b border-b-neutral-600">
