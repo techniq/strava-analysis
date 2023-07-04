@@ -60,7 +60,7 @@
   ).sort(createPropertySortFunc((d) => sportTypeOrder.indexOf(d[0])));
 </script>
 
-<AppBar title="Activities" />
+<AppBar title="History" />
 
 <main>
   <div class="bg-white">
