@@ -72,7 +72,10 @@
           // },
           {
             name: 'sport_type',
-            header: 'Type'
+            header: 'Type',
+            class: {
+              data: 'w-[80px]'
+            }
           },
           // {
           //   name: 'workout_type'
@@ -89,14 +92,20 @@
             name: 'start_date',
             header: 'Date',
             format: (value) => dateDisplay(value, { format: 'M/d/yy' }),
-            align: 'right'
+            align: 'right',
+            class: {
+              data: 'w-[100px]'
+            }
           },
           {
             name: 'start_date-time',
             header: 'Time',
             value: (d) => d.start_date,
             format: (value) => dateDisplay(value, { format: 'h:mm a' }),
-            align: 'right'
+            align: 'right',
+            class: {
+              data: 'w-[100px]'
+            }
           },
           {
             name: 'distance',
@@ -156,7 +165,6 @@
                 name: 'average_heartrate',
                 header: 'Avg',
                 format: (value) => (value ? `${value} bpm` : ''),
-                align: 'right',
                 class: {
                   data: 'w-[100px]'
                 },
@@ -171,7 +179,6 @@
                 name: 'max_heartrate',
                 header: 'Max',
                 format: (value) => (value ? `${value} bpm` : ''),
-                align: 'right',
                 class: {
                   data: 'w-[100px]'
                 },
