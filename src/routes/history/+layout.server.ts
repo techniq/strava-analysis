@@ -4,12 +4,12 @@ import { createPropertySortFunc } from 'svelte-ux/utils/sort';
 import { Strava } from '$lib/api.js';
 import { redirect } from '@sveltejs/kit';
 
-export async function load({ parent, setHeaders, url }) {
+export async function load({ locals, setHeaders, url }) {
   if (url.pathname === '/history') {
     throw redirect(302, '/history/overview');
   }
 
-  const { accessToken, athlete } = await parent();
+  const { accessToken, athlete } = locals;
 
   const strava = new Strava(accessToken);
 
