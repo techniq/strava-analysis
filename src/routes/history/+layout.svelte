@@ -20,6 +20,7 @@
       <ToggleOption value="/history/overview">Overview</ToggleOption>
       <ToggleOption value="/history/cumulative">Cumulative</ToggleOption>
       <ToggleOption value="/history/yearly">Yearly</ToggleOption>
+      <ToggleOption value="/history/yearToDate">YTD</ToggleOption>
     </ToggleGroup>
   </div>
 
