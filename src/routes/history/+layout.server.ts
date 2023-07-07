@@ -45,7 +45,7 @@ export async function load({ locals, setHeaders, url }) {
               values: addTotalDistance(yearlyValues)
             };
           },
-          (d) => d.start_date.getYear()
+          (d) => d.start_date.getFullYear()
         )
       };
     },

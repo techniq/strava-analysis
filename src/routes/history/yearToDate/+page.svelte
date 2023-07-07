@@ -4,7 +4,17 @@
   import { format, getDayOfYear } from 'date-fns';
 
   import { Card } from 'svelte-ux';
-  import { Area, Axis, Chart, HighlightLine, Path, Svg, Tooltip, TooltipItem } from 'layerchart';
+  import {
+    Axis,
+    Chart,
+    HighlightLine,
+    Path,
+    Point,
+    Svg,
+    Text,
+    Tooltip,
+    TooltipItem
+  } from 'layerchart';
   import { createPropertySortFunc } from 'svelte-ux/utils/sort';
   import { extent } from 'd3-array';
 
@@ -31,14 +41,28 @@
         y={(d) => d.totalDistance / 1609}
         yDomain={[0, null]}
         yNice
-        padding={{ left: 32, bottom: 24, right: 16 }}
+        padding={{ left: 32, bottom: 24, right: 32 }}
         tooltip={{ mode: 'voronoi', snapToDataX: true, snapToDataY: true }}
       >
         <Svg>
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
           <Axis placement="bottom" rule ticks={0} />
           {#each data.valuesByYear.sort(createPropertySortFunc((d) => d[0])) as [year, yearData], i}
-            <Path data={yearData.values} width={2} color={colorScale(year)} />
+            {@const color = colorScale(year)}
+            <Path data={yearData.values} width={2} {color} />
+            <Point d={yearData.values[yearData.values.length - 1]} let:x let:y>
+              <circle cx={x} cy={y} r={3} fill={color} />
+              <Text
+                {x}
+                {y}
+                verticalAnchor="middle"
+                value={year}
+                dx={4}
+                dy={-2}
+                class="text-xs"
+                style="fill:{color}"
+              />
+            </Point>
           {/each}
           <HighlightLine color="var(--color-blue-500)" />
         </Svg>
