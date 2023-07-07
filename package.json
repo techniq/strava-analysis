@@ -13,7 +13,7 @@
   "devDependencies": {
     "@sveltejs/adapter-netlify": "^2.0.7",
     "@sveltejs/adapter-vercel": "^3.0.1",
-    "@sveltejs/kit": "^1.22.0",
+    "@sveltejs/kit": "^1.22.1",
     "@types/cookies": "^0.7.7",
     "@types/d3-array": "^3.0.5",
     "@types/d3-scale": "^4.0.3",
@@ -22,12 +22,12 @@
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
     "svelte": "^3.49.0",
-    "svelte-check": "^3.4.4",
+    "svelte-check": "^3.4.5",
     "svelte-preprocess": "^5.0.4",
     "tailwindcss": "^3.3.2",
     "tslib": "^2.6.0",
     "typescript": "^5.1.6",
-    "vite": "^4.3.9"
+    "vite": "^4.4.1"
   },
   "type": "module",
   "dependencies": {
@@ -38,7 +38,7 @@
     "d3-scale-chromatic": "^3.0.0",
     "d3-time": "^3.1.0",
     "date-fns": "^2.30.0",
-    "layerchart": "^0.18.1",
+    "layerchart": "^0.19.0",
     "svelte-ux": "^0.43.5"
   }
 }
