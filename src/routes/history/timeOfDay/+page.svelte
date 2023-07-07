@@ -66,7 +66,7 @@
 
 <div class="grid gap-4 p-4">
   {#each [...chartDataByType] as [type, valuesByDayOfWeek, valuesByDayOfWeekAndHours]}
-    <Card title={type} class="group">
+    <Card title={type} class="group z-auto">
       <div class="h-[700px]">
         <Chart
           data={valuesByDayOfWeekAndHours}
@@ -121,7 +121,7 @@
 
           <Tooltip
             class="whitespace-nowrap"
-            header={(d) => formatDate(d.date, PeriodType.Day)}
+            header={(d) => `${daysOfWeek[d[0]]} @ ${d[1]}:00`}
             let:data
           >
             {@const [
@@ -235,11 +235,7 @@
             <HighlightRect axis="y" />
           </Svg>
 
-          <Tooltip
-            class="whitespace-nowrap"
-            header={(d) => formatDate(d.date, PeriodType.Day)}
-            let:data
-          >
+          <Tooltip class="whitespace-nowrap" header={(d) => daysOfWeek[d[0]]} let:data>
             {@const [
               dayOfWeek,
               {
