@@ -4,6 +4,6 @@
 
 <AppBar title="Home" />
 
-<div class="p-2">
+<main class="p-2">
   <h1>Home</h1>
-</div>
+</main>

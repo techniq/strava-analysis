@@ -14,7 +14,7 @@
     <ToggleGroup
       value={$page.route.id}
       variant="underlined"
-      classes={{ root: 'px-4', option: 'px-4' }}
+      classes={{ root: 'px-4 overflow-auto scrollbar-none', option: 'px-4 whitespace-nowrap' }}
       on:change={(e) => goto(e.detail.value)}
     >
       <ToggleOption value="/history/overview">Overview</ToggleOption>
