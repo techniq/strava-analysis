@@ -59,7 +59,7 @@
                 value={year}
                 dx={4}
                 dy={-2}
-                class="text-xs"
+                class="text-xs stroke-white stroke-2"
                 style="fill:{color}"
               />
             </Point>
