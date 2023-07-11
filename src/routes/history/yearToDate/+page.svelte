@@ -1,21 +1,10 @@
 <script lang="ts">
-  import { linear } from 'svelte/easing';
   import { scaleSequential, scaleTime } from 'd3-scale';
   import { interpolateTurbo } from 'd3-scale-chromatic';
   import { format, getDayOfYear } from 'date-fns';
 
   import { Card } from 'svelte-ux';
-  import {
-    Axis,
-    Chart,
-    HighlightLine,
-    MotionPath,
-    Spline,
-    Svg,
-    Text,
-    Tooltip,
-    TooltipItem
-  } from 'layerchart';
+  import { Axis, Chart, HighlightLine, Spline, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
   import { createPropertySortFunc } from 'svelte-ux/utils/sort';
   import { extent } from 'd3-array';
 
@@ -50,15 +39,8 @@
           <Axis placement="bottom" rule ticks={0} />
           {#each data.valuesByYear.sort(createPropertySortFunc((d) => d[0])) as [year, yearData], i}
             {@const color = colorScale(year)}
-            <MotionPath duration="3s" let:pathId let:objectId>
-              <Spline
-                id={pathId}
-                data={yearData.values}
-                width={2}
-                stroke={color}
-                draw={{ duration: 3000, easing: linear }}
-              />
-              <g id={objectId}>
+            <Spline data={yearData.values} width={2} stroke={color}>
+              <svelte:fragment slot="end">
                 <circle r={3} fill={color} />
                 <Text
                   verticalAnchor="middle"
@@ -68,8 +50,8 @@
                   class="text-xs stroke-white stroke-2"
                   style="fill:{color}"
                 />
-              </g>
-            </MotionPath>
+              </svelte:fragment>
+            </Spline>
           {/each}
           <HighlightLine color="var(--color-blue-500)" />
         </Svg>
