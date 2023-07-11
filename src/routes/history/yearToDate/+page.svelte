@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { linear } from 'svelte/easing';
   import { scaleSequential, scaleTime } from 'd3-scale';
   import { interpolateTurbo } from 'd3-scale-chromatic';
   import { format, getDayOfYear } from 'date-fns';
@@ -8,7 +9,7 @@
     Axis,
     Chart,
     HighlightLine,
-    Point,
+    MotionPath,
     Spline,
     Svg,
     Text,
@@ -49,20 +50,26 @@
           <Axis placement="bottom" rule ticks={0} />
           {#each data.valuesByYear.sort(createPropertySortFunc((d) => d[0])) as [year, yearData], i}
             {@const color = colorScale(year)}
-            <Spline data={yearData.values} width={2} stroke={color} />
-            <Point d={yearData.values[yearData.values.length - 1]} let:x let:y>
-              <circle cx={x} cy={y} r={3} fill={color} />
-              <Text
-                {x}
-                {y}
-                verticalAnchor="middle"
-                value={year}
-                dx={4}
-                dy={-2}
-                class="text-xs stroke-white stroke-2"
-                style="fill:{color}"
+            <MotionPath duration="3s" let:pathId let:objectId>
+              <Spline
+                id={pathId}
+                data={yearData.values}
+                width={2}
+                stroke={color}
+                draw={{ duration: 3000, easing: linear }}
               />
-            </Point>
+              <g id={objectId}>
+                <circle r={3} fill={color} />
+                <Text
+                  verticalAnchor="middle"
+                  value={year}
+                  dx={4}
+                  dy={-2}
+                  class="text-xs stroke-white stroke-2"
+                  style="fill:{color}"
+                />
+              </g>
+            </MotionPath>
           {/each}
           <HighlightLine color="var(--color-blue-500)" />
         </Svg>
