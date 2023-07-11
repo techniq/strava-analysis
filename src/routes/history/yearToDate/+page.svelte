@@ -8,8 +8,8 @@
     Axis,
     Chart,
     HighlightLine,
-    Path,
     Point,
+    Spline,
     Svg,
     Text,
     Tooltip,
@@ -49,7 +49,7 @@
           <Axis placement="bottom" rule ticks={0} />
           {#each data.valuesByYear.sort(createPropertySortFunc((d) => d[0])) as [year, yearData], i}
             {@const color = colorScale(year)}
-            <Path data={yearData.values} width={2} {color} />
+            <Spline data={yearData.values} width={2} stroke={color} />
             <Point d={yearData.values[yearData.values.length - 1]} let:x let:y>
               <circle cx={x} cy={y} r={3} fill={color} />
               <Text

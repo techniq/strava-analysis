@@ -28,7 +28,11 @@
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
           <Axis placement="bottom" grid rule />
           {#each data.valuesByYear as [year, yearData]}
-            <Area data={yearData.values} line={{ width: 2 }} />
+            <Area
+              data={yearData.values}
+              line={{ class: 'stroke-2 stroke-blue-500' }}
+              class="fill-blue-500/30"
+            />
           {/each}
           <HighlightLine color="var(--color-blue-500)" />
         </Svg>
