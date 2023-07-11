@@ -53,7 +53,7 @@
               </svelte:fragment>
             </Spline>
           {/each}
-          <HighlightLine color="var(--color-blue-500)" />
+          <HighlightLine color="var(--color-black)" />
         </Svg>
         <Tooltip header={(data) => format(data.start_date, 'MM/dd/yyyy')} let:data>
           <TooltipItem
