@@ -13,8 +13,13 @@
   <div class="bg-white">
     <ToggleGroup
       value={$page.route.id}
-      variant="underlined"
-      classes={{ root: 'px-4 overflow-auto scrollbar-none', option: 'px-4 whitespace-nowrap' }}
+      variant="underline"
+      classes={{
+        root: 'overflow-auto scrollbar-none',
+        options: 'h-10 justify-start',
+        label: 'first:ml-10',
+        option: 'px-4 whitespace-nowrap'
+      }}
       on:change={(e) => goto(e.detail.value)}
     >
       <ToggleOption value="/history/overview">Overview</ToggleOption>
