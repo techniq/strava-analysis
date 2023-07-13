@@ -40,11 +40,6 @@
 
 <NavItem text="Home" icon={mdiHome} path="/" currentUrl={$page.url} class="mt-2" />
 
-<h2>Analysis</h2>
-<NavItem
-  text="Activities"
-  icon={mdiTimelineClockOutline}
-  path="/activities"
-  currentUrl={$page.url}
-/>
-<NavItem text="History" icon={mdiFinance} path="/history" currentUrl={$page.url} />
+<h2>Activities</h2>
+<NavItem text="Browse" icon={mdiTimelineClockOutline} path="/activities" currentUrl={$page.url} />
+<NavItem text="Analysis" icon={mdiFinance} path="/analysis" currentUrl={$page.url} />

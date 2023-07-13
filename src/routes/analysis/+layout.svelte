@@ -7,7 +7,7 @@
   export let data;
 </script>
 
-<AppBar title="History" />
+<AppBar title="Analysis" />
 
 <main>
   <div class="bg-white">
@@ -17,16 +17,16 @@
       classes={{
         root: 'overflow-auto scrollbar-none',
         options: 'h-10 justify-start',
-        label: 'first:ml-10',
+        label: 'first:ml-4',
         option: 'px-4 whitespace-nowrap'
       }}
       on:change={(e) => goto(e.detail.value)}
     >
-      <ToggleOption value="/history/overview">Overview</ToggleOption>
-      <ToggleOption value="/history/yearly">Yearly</ToggleOption>
-      <ToggleOption value="/history/yearToDate">Year to Date</ToggleOption>
-      <ToggleOption value="/history/timeOfDay">Time of Day</ToggleOption>
-      <ToggleOption value="/history/cumulative">Cumulative</ToggleOption>
+      <ToggleOption value="/analysis/overview">Overview</ToggleOption>
+      <ToggleOption value="/analysis/yearly">Yearly</ToggleOption>
+      <ToggleOption value="/analysis/yearToDate">Year to Date</ToggleOption>
+      <ToggleOption value="/analysis/timeOfDay">Time of Day</ToggleOption>
+      <ToggleOption value="/analysis/cumulative">Cumulative</ToggleOption>
     </ToggleGroup>
   </div>
 
