@@ -56,7 +56,6 @@
       icon={mdiAccount}
       dense
       placeholder="Pick an athlete"
-      shrinkLabel
       class="flex-1"
     />
     <Button type="submit" icon={mdiPlay} variant="fill" color="blue">Run</Button>

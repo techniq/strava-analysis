@@ -4,7 +4,7 @@
   import { format, getDayOfYear } from 'date-fns';
 
   import { Card } from 'svelte-ux';
-  import { Axis, Chart, HighlightLine, Spline, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
+  import { Axis, Chart, Highlight, Spline, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
   import { createPropertySortFunc } from 'svelte-ux/utils/sort';
   import { extent } from 'd3-array';
 
@@ -53,7 +53,7 @@
               </svelte:fragment>
             </Spline>
           {/each}
-          <HighlightLine color="var(--color-black)" />
+          <Highlight points={{ class: 'fill-black' }} lines />
         </Svg>
         <Tooltip header={(data) => format(data.start_date, 'MM/dd/yyyy')} let:data>
           <TooltipItem

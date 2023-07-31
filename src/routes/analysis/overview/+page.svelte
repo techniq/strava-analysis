@@ -4,7 +4,7 @@
   import { format } from 'date-fns';
 
   import { Card, PeriodType, formatDate } from 'svelte-ux';
-  import { Axis, Bars, Chart, HighlightLine, Svg, Tooltip, TooltipItem } from 'layerchart';
+  import { Axis, Bars, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
 
   export let data;
 
@@ -35,7 +35,7 @@
             format={(d) => formatDate(d, PeriodType.CalendarYear)}
           />
           <Bars class="fill-blue-500/10" />
-          <HighlightLine color="var(--color-blue-500)" />
+          <Highlight points={{ class: 'fill-blue-500' }} lines />
         </Svg>
         <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
           <TooltipItem

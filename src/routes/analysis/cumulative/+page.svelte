@@ -3,7 +3,7 @@
   import { format } from 'date-fns';
 
   import { Card } from 'svelte-ux';
-  import { Area, Axis, Chart, HighlightLine, Svg, Tooltip, TooltipItem } from 'layerchart';
+  import { Area, Axis, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
 
   export let data;
 
@@ -29,7 +29,7 @@
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
           <Axis placement="bottom" grid rule />
           <Area line={{ class: 'stroke-blue-500 stroke-2' }} class="fill-blue-500/30" />
-          <HighlightLine color="var(--color-blue-500)" />
+          <Highlight points={{ class: 'fill-blue-500' }} lines />
         </Svg>
         <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
           <TooltipItem

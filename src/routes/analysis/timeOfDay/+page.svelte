@@ -8,8 +8,7 @@
     Bars,
     Chart,
     Circle,
-    HighlightLine,
-    HighlightRect,
+    Highlight,
     Points,
     Svg,
     Text,
@@ -115,8 +114,8 @@
                 />
               {/each}
             </Points>
-            <HighlightRect axis="x" />
-            <HighlightRect axis="y" />
+            <Highlight area axis="x" />
+            <Highlight area axis="y" />
           </Svg>
 
           <Tooltip
@@ -231,8 +230,8 @@
                 />
               {/each}
             </Points>
-            <HighlightRect axis="x" />
-            <HighlightRect axis="y" />
+            <Highlight area axis="x" />
+            <Highlight area axis="y" />
           </Svg>
 
           <Tooltip class="whitespace-nowrap" header={(d) => daysOfWeek[d[0]]} let:data>
