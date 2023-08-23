@@ -2,9 +2,8 @@ import { cumsum, extent, flatRollup, zip, range } from 'd3-array';
 import { createPropertySortFunc } from 'svelte-ux/utils/sort';
 
 import { Strava } from '$lib/api.js';
-import { redirect } from '@sveltejs/kit';
 
-export async function load({ parent, locals, setHeaders }) {
+export async function load({ locals, setHeaders }) {
   const { accessToken, athlete } = locals;
 
   const strava = new Strava(accessToken);
