@@ -15,48 +15,56 @@ export async function load({ locals, setHeaders }) {
   const per_page = 200; // Strava limit
   const totalPages = Math.ceil(totalActivities / per_page);
 
-  const activitiesResults = await Promise.allSettled(
-    range(totalPages).map((x) =>
-      strava.api('/athlete/activities', { data: { page: x + 1, per_page } })
-    )
-  );
-  const activities = await activitiesResults
-    .flatMap((r) => r.value)
-    .sort(createPropertySortFunc('start_date'));
+  async function getActivities() {
+    const activitiesResults = await Promise.allSettled(
+      range(totalPages).map((x) =>
+        strava.api('/athlete/activities', { data: { page: x + 1, per_page } })
+      )
+    );
+    const activities = await activitiesResults
+      .flatMap((r) => r.value)
+      .sort(createPropertySortFunc('start_date'));
 
-  const startDateExtent = extent(activities, (d) => d.start_date);
+    const startDateExtent = extent(activities, (d) => d.start_date);
 
-  const sportTypeOrder = ['Run', 'Ride', 'VirtualRide', 'Walk', 'Workout'];
-  const activitiesBySportType = flatRollup(
-    activities,
-    (values) => {
-      // Add cumulutive distance `totalDistance`
-      return {
-        values: addTotalDistance(values),
-        valuesByYear: flatRollup(
-          values,
-          (yearlyValues) => {
-            return {
-              values: addTotalDistance(yearlyValues)
-            };
-          },
-          (d) => d.start_date.getFullYear()
-        )
-      };
-    },
-    (d) => d.sport_type
-  ).sort(createPropertySortFunc((d) => sportTypeOrder.indexOf(d[0])));
+    const sportTypeOrder = ['Run', 'Ride', 'VirtualRide', 'Walk', 'Workout'];
+    const activitiesBySportType = flatRollup(
+      activities,
+      (values) => {
+        // Add cumulutive distance `totalDistance`
+        return {
+          values: addTotalDistance(values),
+          valuesByYear: flatRollup(
+            values,
+            (yearlyValues) => {
+              return {
+                values: addTotalDistance(yearlyValues)
+              };
+            },
+            (d) => d.start_date.getFullYear()
+          )
+        };
+      },
+      (d) => d.sport_type
+    ).sort(createPropertySortFunc((d) => sportTypeOrder.indexOf(d[0])));
 
-  function addTotalDistance(values: any[]) {
-    return zip(
-      values,
-      cumsum(values, (d) => d.distance)
-    ).map(([v1, v2]) => {
-      return {
-        ...v1,
-        totalDistance: v2
-      };
-    });
+    function addTotalDistance(values: any[]) {
+      return zip(
+        values,
+        cumsum(values, (d) => d.distance)
+      ).map(([v1, v2]) => {
+        return {
+          ...v1,
+          totalDistance: v2
+        };
+      });
+    }
+
+    return {
+      activities,
+      activitiesBySportType,
+      startDateExtent
+    };
   }
 
   setHeaders({
@@ -64,8 +72,10 @@ export async function load({ locals, setHeaders }) {
   });
 
   return {
-    activities,
-    activitiesBySportType,
-    startDateExtent
+    totalActivities,
+    totalPages,
+    streamed: {
+      activities: getActivities()
+    }
   };
 }

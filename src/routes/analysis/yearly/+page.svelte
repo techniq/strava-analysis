@@ -2,16 +2,19 @@
   import { scaleTime } from 'd3-scale';
   import { format } from 'date-fns';
 
-  import { Card } from 'svelte-ux';
+  import { Card, promiseStore } from 'svelte-ux';
   import { Area, Axis, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
 
   export let data;
+  const streamed = promiseStore(data.streamed.activities);
+  $: streamed.setPromise(data.streamed.activities);
 
-  $: ({ activitiesBySportType, startDateExtent } = data);
+  $: activitiesBySportType = [...($streamed.data?.activitiesBySportType ?? [])];
+  $: startDateExtent = $streamed.data?.startDateExtent ?? [];
 </script>
 
 <div class="grid gap-4 p-4">
-  {#each [...activitiesBySportType] as [type, data]}
+  {#each activitiesBySportType as [type, data]}
     <Card title={type} class="h-[300px]">
       <Chart
         data={data.valuesByYear.flatMap((d) => d[1].values)}

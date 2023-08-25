@@ -15,7 +15,8 @@
     tableCell,
     paginationStore,
     changeStore,
-    Icon
+    Icon,
+    promiseStore
   } from 'svelte-ux';
   import { getCellValue, getCellContent } from 'svelte-ux/utils/table';
 
@@ -44,6 +45,9 @@
 
   const paginationChange = changeStore(pagination, run);
   $paginationChange; // must subscribe to fire change events
+
+  const streamed = promiseStore(data.streamed.activities);
+  $: streamed.setPromise(data.streamed.activities);
 </script>
 
 <AppBar title="Activities" />
@@ -62,9 +66,9 @@
   </form> -->
 
   <div class="relative min-h-[56px] p-4">
-    <Card class="overflow-auto">
+    <Card class="overflow-auto" loading={$streamed.loading}>
       <Table
-        data={data.activities}
+        data={$streamed.data ?? []}
         columns={[
           {
             name: 'sport_type',

@@ -2,14 +2,17 @@
   import { scaleSequential, scaleTime } from 'd3-scale';
   import { interpolateTurbo } from 'd3-scale-chromatic';
   import { format, getDayOfYear } from 'date-fns';
-
-  import { Card } from 'svelte-ux';
-  import { Axis, Chart, Highlight, Spline, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
-  import { createPropertySortFunc } from 'svelte-ux/utils/sort';
   import { extent } from 'd3-array';
 
+  import { Card, promiseStore } from 'svelte-ux';
+  import { Axis, Chart, Highlight, Spline, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
+  import { createPropertySortFunc } from 'svelte-ux/utils/sort';
+
   export let data;
-  $: ({ activitiesBySportType } = data);
+  const streamed = promiseStore(data.streamed.activities);
+  $: streamed.setPromise(data.streamed.activities);
+
+  $: activitiesBySportType = [...($streamed.data?.activitiesBySportType ?? [])];
 
   $: yearsDomain = extent(
     activitiesBySportType
@@ -21,7 +24,7 @@
 </script>
 
 <div class="grid gap-4 p-4">
-  {#each [...activitiesBySportType] as [type, data]}
+  {#each activitiesBySportType as [type, data]}
     <Card title={type} class="h-[300px]">
       <Chart
         data={data.valuesByYear.flatMap((d) => d[1].values)}

@@ -1,8 +1,9 @@
 <script lang="ts">
   import { scaleBand, scaleSqrt } from 'd3-scale';
   import { getDay, getHours } from 'date-fns';
+  import { flatRollup, max, mean, range, sum } from 'd3-array';
 
-  import { Card, PeriodType, format, formatDate, humanizeDuration } from 'svelte-ux';
+  import { Card, format, humanizeDuration, promiseStore } from 'svelte-ux';
   import {
     Axis,
     Bars,
@@ -16,11 +17,12 @@
     TooltipItem,
     TooltipSeparator
   } from 'layerchart';
-  import { flatRollup, max, mean, range, sum } from 'd3-array';
 
   export let data;
+  const streamed = promiseStore(data.streamed.activities);
+  $: streamed.setPromise(data.streamed.activities);
 
-  $: ({ activitiesBySportType, startDateExtent } = data);
+  $: activitiesBySportType = [...($streamed.data?.activitiesBySportType ?? [])];
 
   $: chartDataByType = activitiesBySportType.map((d) => {
     const [sportType, { values }] = d;

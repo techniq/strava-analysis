@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { AppBar, ToggleGroup, ToggleOption } from 'svelte-ux';
+  import { AppBar, Card, ProgressCircle, ToggleGroup, ToggleOption, format } from 'svelte-ux';
 
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
@@ -30,5 +30,16 @@
     </ToggleGroup>
   </div>
 
-  <slot />
+  {#await data.streamed.activities}
+    <Card class="h-[300px] m-4 grid items-center justify-center">
+      <div class="grid gap-4 justify-items-center">
+        <ProgressCircle class="text-orange-500" />
+        <span class="text-orange-900">
+          Loading {format(data.totalActivities, 'integer')} activities...
+        </span>
+      </div>
+    </Card>
+  {:then data}
+    <slot />
+  {/await}
 </main>

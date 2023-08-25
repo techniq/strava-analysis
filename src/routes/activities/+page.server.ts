@@ -14,7 +14,9 @@ export async function load({ locals, url, setHeaders }) {
   });
 
   return {
-    activities: strava.api('/athlete/activities', { data: { per_page, page } }),
+    streamed: {
+      activities: strava.api('/athlete/activities', { data: { per_page, page } })
+    },
     stats: strava.api(`/athletes/${athleteId}/stats`),
     params: {
       athleteId,
