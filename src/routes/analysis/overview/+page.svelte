@@ -17,7 +17,15 @@
 
 <div class="grid gap-4 p-4">
   {#each activitiesBySportType as [type, data]}
-    <Card title={type} class="h-[300px]">
+    {@const lastActivity = data.values.at(-1)}
+    <Card
+      title={type}
+      subheading="{data.values.length} activities • {format(
+        metersToMiles(lastActivity.totalDistance),
+        'decimal'
+      )} total miles"
+      class="h-[300px]"
+    >
       <Chart
         data={data.values}
         x={(d) => timeMonth(d.start_date)}
