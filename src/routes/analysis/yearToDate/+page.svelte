@@ -12,7 +12,7 @@
   const streamed = promiseStore(data.streamed.activities);
   $: streamed.setPromise(data.streamed.activities);
 
-  $: activitiesBySportType = [...($streamed.data?.activitiesBySportType ?? [])];
+  $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
 
   $: yearsDomain = extent(
     activitiesBySportType

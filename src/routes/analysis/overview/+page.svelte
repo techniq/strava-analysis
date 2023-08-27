@@ -10,8 +10,10 @@
   const streamed = promiseStore(data.streamed.activities);
   $: streamed.setPromise(data.streamed.activities);
 
-  $: activitiesBySportType = [...($streamed.data?.activitiesBySportType ?? [])];
+  $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
   $: startDateExtent = $streamed.data?.startDateExtent ?? [];
+
+  $: console.log({ activitiesBySportType });
 </script>
 
 <div class="grid gap-4 p-4">
