@@ -1,10 +1,11 @@
 <script lang="ts">
   import { scaleBand } from 'd3-scale';
   import { timeMonth, timeYear } from 'd3-time';
-  import { format } from 'date-fns';
+  import { format as dateFormat } from 'date-fns';
 
-  import { Card, PeriodType, formatDate, promiseStore } from 'svelte-ux';
+  import { Card, PeriodType, formatDate, promiseStore, format } from 'svelte-ux';
   import { Axis, Bars, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
+  import { metersToMiles } from '$lib/utils.js';
 
   export let data;
   const streamed = promiseStore(data.streamed.activities);
@@ -12,8 +13,6 @@
 
   $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
   $: startDateExtent = $streamed.data?.startDateExtent ?? [];
-
-  $: console.log({ activitiesBySportType });
 </script>
 
 <div class="grid gap-4 p-4">
@@ -24,7 +23,7 @@
         x={(d) => timeMonth(d.start_date)}
         xScale={scaleBand().padding(0.1)}
         xDomain={timeMonth.range(...startDateExtent)}
-        y={(d) => d.distance / 1609}
+        y={(d) => metersToMiles(d.distance)}
         yDomain={[0, null]}
         yNice
         padding={{ left: 32, bottom: 24, right: 16 }}
@@ -42,16 +41,16 @@
           <Bars class="fill-blue-500/10" />
           <Highlight points={{ class: 'fill-blue-500' }} lines />
         </Svg>
-        <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
+        <Tooltip header={(data) => dateFormat(data.start_date, 'eee, MMMM do')} let:data>
           <TooltipItem
             label="Distance"
-            value={data.distance / 1609}
+            value={metersToMiles(data.distance)}
             format="decimal"
             valueAlign="right"
           />
           <TooltipItem
             label="Total Distance"
-            value={data.totalDistance / 1609}
+            value={metersToMiles(data.totalDistance)}
             format="decimal"
             valueAlign="right"
           />

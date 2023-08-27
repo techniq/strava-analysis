@@ -21,6 +21,7 @@
   import { getCellValue, getCellContent } from 'svelte-ux/utils/table';
 
   import { goto } from '$app/navigation';
+  import { metersToFeet, metersToMiles } from '$lib/utils.js';
 
   export let data;
 
@@ -107,7 +108,7 @@
           {
             name: 'distance',
             header: 'Distance',
-            format: (value) => format(value / 1609, 'decimal') + ' mi',
+            format: (value) => format(metersToMiles(value), 'decimal') + ' mi',
             align: 'right',
             dataBackground: {
               color: 'var(--color-blue-100)',
@@ -118,7 +119,7 @@
           {
             name: 'total_elevation_gain',
             header: 'Elevation',
-            format: (value) => format(value * 3.281, 'integer') + ' ft',
+            format: (value) => format(metersToFeet(value), 'integer') + ' ft',
             align: 'right',
             dataBackground: {
               color: 'var(--color-blue-100)',
@@ -138,7 +139,8 @@
           {
             name: 'pace',
             header: 'Pace',
-            value: (d) => (d.distance ? Math.round(d.moving_time / (d.distance / 1609)) : null),
+            value: (d) =>
+              d.distance ? Math.round(d.moving_time / metersToMiles(d.distance)) : null,
             dataBackground: {
               color: 'var(--color-blue-100)',
               inset: [1, 2],

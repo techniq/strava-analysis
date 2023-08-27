@@ -4,6 +4,7 @@
 
   import { Card, promiseStore } from 'svelte-ux';
   import { Area, Axis, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
+  import { metersToMiles } from '$lib/utils.js';
 
   export let data;
   const streamed = promiseStore(data.streamed.activities);
@@ -21,7 +22,7 @@
         x="start_date"
         xScale={scaleTime()}
         xDomain={startDateExtent}
-        y={(d) => d.totalDistance / 1609}
+        y={(d) => metersToMiles(d.totalDistance)}
         yDomain={[0, null]}
         yNice
         padding={{ left: 32, bottom: 24, right: 16 }}
@@ -42,13 +43,13 @@
         <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
           <TooltipItem
             label="Distance"
-            value={data.distance / 1609}
+            value={metersToMiles(data.distance)}
             format="decimal"
             valueAlign="right"
           />
           <TooltipItem
             label="Total Distance"
-            value={data.totalDistance / 1609}
+            value={metersToMiles(data.totalDistance)}
             format="decimal"
             valueAlign="right"
           />

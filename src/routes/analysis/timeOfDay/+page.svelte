@@ -17,6 +17,7 @@
     TooltipItem,
     TooltipSeparator
   } from 'layerchart';
+  import { metersToFeet, metersToMiles } from '$lib/utils.js';
 
   export let data;
   const streamed = promiseStore(data.streamed.activities);
@@ -159,13 +160,13 @@
               label="Avg. Distance"
               value={avgDistance}
               valueAlign="right"
-              format={(value) => format(value / 1609, 'decimal') + ' mi'}
+              format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
             />
             <TooltipItem
               label="Total Distance"
               value={totalDistance}
               valueAlign="right"
-              format={(value) => format(value / 1609, 'decimal') + ' mi'}
+              format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
             />
 
             <TooltipSeparator />
@@ -173,13 +174,13 @@
               label="Avg. Elevation"
               value={avgElevation}
               valueAlign="right"
-              format={(value) => format(value * 3.281, 'integer') + ' ft'}
+              format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
             />
             <TooltipItem
               label="Total Elevation"
               value={totalElevation}
               valueAlign="right"
-              format={(value) => format(value * 3.281, 'integer') + ' ft'}
+              format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
             />
           </Tooltip>
         </Chart>
@@ -270,13 +271,13 @@
               label="Avg. Distance"
               value={avgDistance}
               valueAlign="right"
-              format={(value) => format(value / 1609, 'decimal') + ' mi'}
+              format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
             />
             <TooltipItem
               label="Total Distance"
               value={totalDistance}
               valueAlign="right"
-              format={(value) => format(value / 1609, 'decimal') + ' mi'}
+              format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
             />
 
             <TooltipSeparator />
@@ -284,13 +285,13 @@
               label="Avg. Elevation"
               value={avgElevation}
               valueAlign="right"
-              format={(value) => format(value * 3.281, 'integer') + ' ft'}
+              format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
             />
             <TooltipItem
               label="Total Elevation"
               value={totalElevation}
               valueAlign="right"
-              format={(value) => format(value * 3.281, 'integer') + ' ft'}
+              format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
             />
           </Tooltip>
         </Chart>
