@@ -1,12 +1,16 @@
 <script lang="ts">
+  import { inject } from '@vercel/analytics';
   import { AppLayout, ViewportCenter, Card, Button, createTheme } from 'svelte-ux';
-
-  import { athlete } from '$lib/stores';
-
-  import NavMenu from './_NavMenu.svelte';
   import { mdiLogin } from '@mdi/js';
 
+  import { athlete } from '$lib/stores';
+  import { dev } from '$app/environment';
+
+  import NavMenu from './_NavMenu.svelte';
+
   export let data;
+
+  inject({ mode: dev ? 'development' : 'production' });
 
   createTheme({
     //
