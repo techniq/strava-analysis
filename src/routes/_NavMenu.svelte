@@ -5,8 +5,6 @@
 
   import { athlete } from '$lib/stores';
   import { page } from '$app/stores';
-
-  $: console.log({ $athlete });
 </script>
 
 <NavItem currentUrl={$page.url} class="pl-4 border-b border-b-neutral-600">
@@ -38,8 +36,8 @@
   </Toggle>
 </NavItem>
 
-<NavItem text="Home" icon={mdiHome} path="/" currentUrl={$page.url} class="mt-2" />
+<!-- <NavItem text="Home" icon={mdiHome} path="/" currentUrl={$page.url} class="mt-2" /> -->
 
 <h2>Activities</h2>
-<NavItem text="Browse" icon={mdiTimelineClockOutline} path="/activities" currentUrl={$page.url} />
 <NavItem text="Analysis" icon={mdiFinance} path="/analysis" currentUrl={$page.url} />
+<NavItem text="Browse" icon={mdiTimelineClockOutline} path="/activities" currentUrl={$page.url} />
