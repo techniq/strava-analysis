@@ -7,6 +7,7 @@
   import { Card, PeriodType, promiseStore, format } from 'svelte-ux';
   import { Calendar, Chart, Group, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
   import { metersToMiles } from '$lib/utils.js';
+  import { createPropertySortFunc } from 'svelte-ux/utils/sort';
 
   export let data;
   const streamed = promiseStore(data.streamed.activities);
@@ -15,7 +16,9 @@
   $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
   $: startDateExtent = $streamed.data?.startDateExtent ?? [];
 
-  $: years = range(startDateExtent[0]?.getFullYear(), startDateExtent[1]?.getFullYear() + 1);
+  $: years = range(startDateExtent[0]?.getFullYear(), startDateExtent[1]?.getFullYear() + 1).sort(
+    createPropertySortFunc((d) => d, 'desc')
+  );
 
   // Rollup by day
   function rollupActivites(values: any[]) {
