@@ -25,6 +25,7 @@
       <ToggleOption value="/analysis/overview">Overview</ToggleOption>
       <ToggleOption value="/analysis/yearly">Yearly</ToggleOption>
       <ToggleOption value="/analysis/yearToDate">Year to Date</ToggleOption>
+      <ToggleOption value="/analysis/calendar">Calendar</ToggleOption>
       <ToggleOption value="/analysis/timeOfDay">Time of Day</ToggleOption>
       <ToggleOption value="/analysis/cumulative">Cumulative</ToggleOption>
     </ToggleGroup>
