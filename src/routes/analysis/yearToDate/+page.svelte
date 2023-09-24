@@ -37,12 +37,16 @@
         yNice
         padding={{ left: 32, bottom: 24, right: 32 }}
         tooltip={{ mode: 'voronoi', snapToDataX: true, snapToDataY: true }}
+        let:tooltip
       >
         <Svg>
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
           <Axis placement="bottom" rule ticks={0} />
           {#each data.valuesByYear.sort(createPropertySortFunc((d) => d[0])) as [year, yearData], i}
-            {@const color = colorScale(year)}
+            {@const color =
+              tooltip.data == null || tooltip.data.start_date.getFullYear() === year
+                ? colorScale(year)
+                : '#ddd'}
             <Spline data={yearData.values} width={2} stroke={color}>
               <svelte:fragment slot="end">
                 <circle r={3} fill={color} />
