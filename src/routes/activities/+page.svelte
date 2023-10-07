@@ -1,15 +1,11 @@
 <script lang="ts">
-  import { mdiAccount, mdiFlagCheckered, mdiPlay } from '@mdi/js';
+  import { mdiFlagCheckered } from '@mdi/js';
 
   import {
-    AppBar,
-    Button,
     Card,
     Duration,
     Pagination,
-    PeriodType,
     Table,
-    TextField,
     dateDisplay,
     format,
     tableCell,
@@ -50,8 +46,6 @@
   const streamed = promiseStore(data.streamed.activities);
   $: streamed.setPromise(data.streamed.activities);
 </script>
-
-<AppBar title="Activities" />
 
 <main>
   <!-- <form class="flex gap-2 bg-white border-b p-4" on:submit|preventDefault={run}>

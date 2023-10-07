@@ -1,7 +1,7 @@
 <script lang="ts">
   import { inject } from '@vercel/analytics';
-  import { AppLayout, ViewportCenter, Card, Button, createTheme } from 'svelte-ux';
-  import { mdiLogin } from '@mdi/js';
+  import { AppLayout, ViewportCenter, Card, Button, createTheme, AppBar, Tooltip } from 'svelte-ux';
+  import { mdiGithub, mdiLogin, mdiTwitter } from '@mdi/js';
 
   import { athlete } from '$lib/stores';
   import { dev } from '$app/environment';
@@ -34,6 +34,28 @@
     <nav slot="nav" class="nav h-full">
       <NavMenu />
     </nav>
+
+    <AppBar title="Strava Analysis">
+      <div slot="actions" class="flex gap-3">
+        <Tooltip title="Open Twitter / X" placement="left" offset={2}>
+          <Button
+            icon={mdiTwitter}
+            href="https://twitter.com/techniq35"
+            class="p-2"
+            target="_blank"
+          />
+        </Tooltip>
+
+        <Tooltip title="View repository" placement="left" offset={2}>
+          <Button
+            icon={mdiGithub}
+            href="https://github.com/techniq/strava-analysis"
+            class="p-2"
+            target="_blank"
+          />
+        </Tooltip>
+      </div>
+    </AppBar>
 
     <slot />
   </AppLayout>

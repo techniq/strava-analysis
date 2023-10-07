@@ -1,13 +1,11 @@
 <script lang="ts">
-  import { AppBar, Card, ProgressCircle, ToggleGroup, ToggleOption, format } from 'svelte-ux';
+  import { Card, ProgressCircle, ToggleGroup, ToggleOption, format } from 'svelte-ux';
 
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
 
   export let data;
 </script>
-
-<AppBar title="Analysis" />
 
 <main>
   <div class="bg-white">
