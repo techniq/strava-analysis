@@ -51,7 +51,7 @@
         'decimal'
       )} total miles"
       class="overflow-hidden"
-      style="height: {years.length * 128 + 80}px"
+      style="height: {years.length * 136 + 16 + 80}px"
     >
       <Chart
         data={chartData}
@@ -60,7 +60,7 @@
         rScale={scaleThreshold().unknown('transparent')}
         rDomain={[1, 3, 6, 12]}
         rRange={schemeGreens[5]}
-        padding={{ left: 40 }}
+        padding={{ left: 40, top: 16 }}
         tooltip={{ mode: 'manual' }}
         let:tooltip
       >
@@ -68,7 +68,7 @@
           {#each years as year, i}
             {@const start = new Date(year, 0, 1)}
             {@const end = endOfYear(start)}
-            <Group y={128 * i}>
+            <Group y={136 * i}>
               <Text
                 value={year}
                 class="text-xs"
