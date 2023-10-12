@@ -3,7 +3,16 @@
   import { format } from 'date-fns';
 
   import { Card, promiseStore } from 'svelte-ux';
-  import { Area, Axis, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
+  import {
+    Area,
+    Axis,
+    Chart,
+    Highlight,
+    LinearGradient,
+    Svg,
+    Tooltip,
+    TooltipItem
+  } from 'layerchart';
   import { metersToMiles } from '$lib/utils.js';
 
   export let data;
@@ -33,7 +42,9 @@
         <Svg>
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
           <Axis placement="bottom" grid rule />
-          <Area line={{ class: 'stroke-blue-500 stroke-2' }} class="fill-blue-500/30" />
+          <LinearGradient class="from-blue-500/50 to-blue-500/0" vertical let:url>
+            <Area line={{ class: 'stroke-blue-500 stroke-2' }} fill={url} />
+          </LinearGradient>
           <Highlight points={{ class: 'fill-blue-500' }} lines />
         </Svg>
         <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
