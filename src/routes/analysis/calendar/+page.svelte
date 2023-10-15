@@ -4,10 +4,9 @@
   import { flatRollup, range, sum } from 'd3-array';
   import { schemeGreens } from 'd3-scale-chromatic';
 
-  import { Card, PeriodType, promiseStore, format } from 'svelte-ux';
+  import { Card, PeriodType, promiseStore, format, sortFunc } from 'svelte-ux';
   import { Calendar, Chart, Group, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
   import { metersToMiles } from '$lib/utils.js';
-  import { createPropertySortFunc } from 'svelte-ux/utils/sort';
 
   export let data;
   const streamed = promiseStore(data.streamed.activities);
@@ -17,7 +16,7 @@
   $: startDateExtent = $streamed.data?.startDateExtent ?? [];
 
   $: years = range(startDateExtent[0]?.getFullYear(), startDateExtent[1]?.getFullYear() + 1).sort(
-    createPropertySortFunc((d) => d, 'desc')
+    sortFunc((d) => d, 'desc')
   );
 
   // Rollup by day

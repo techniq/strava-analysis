@@ -13,7 +13,7 @@
   "devDependencies": {
     "@sveltejs/adapter-netlify": "^2.0.8",
     "@sveltejs/adapter-vercel": "^3.0.3",
-    "@sveltejs/kit": "^1.25.1",
+    "@sveltejs/kit": "^1.25.2",
     "@types/cookies": "^0.7.8",
     "@types/d3-array": "^3.0.8",
     "@types/d3-scale": "^4.0.5",
@@ -33,13 +33,13 @@
   "dependencies": {
     "@mdi/js": "^7.3.67",
     "@types/d3-scale-chromatic": "^3.0.0",
-    "@vercel/analytics": "^1.1.0",
+    "@vercel/analytics": "^1.1.1",
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.0.0",
     "d3-time": "^3.1.0",
     "date-fns": "^2.30.0",
-    "layerchart": "^0.24.0",
-    "svelte-ux": "^0.50.1"
+    "layerchart": "^0.24.3",
+    "svelte-ux": "^0.53.0"
   }
 }

@@ -1,5 +1,5 @@
 import { cumsum, extent, flatRollup, zip, range } from 'd3-array';
-import { createPropertySortFunc } from 'svelte-ux/utils/sort';
+import { sortFunc } from 'svelte-ux';
 
 import { Strava } from '$lib/api.js';
 
@@ -21,9 +21,7 @@ export async function load({ locals, setHeaders }) {
         strava.api('/athlete/activities', { data: { page: x + 1, per_page } })
       )
     );
-    const activities = await activitiesResults
-      .flatMap((r) => r.value)
-      .sort(createPropertySortFunc('start_date'));
+    const activities = await activitiesResults.flatMap((r) => r.value).sort(sortFunc('start_date'));
 
     const startDateExtent = extent(activities, (d) => d.start_date);
 
@@ -46,7 +44,7 @@ export async function load({ locals, setHeaders }) {
         };
       },
       (d) => d.sport_type
-    ).sort(createPropertySortFunc((d) => sportTypeOrder.indexOf(d[0])));
+    ).sort(sortFunc((d) => sportTypeOrder.indexOf(d[0])));
 
     function addTotalDistance(values: any[]) {
       return zip(

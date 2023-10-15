@@ -4,9 +4,8 @@
   import { format, getDayOfYear } from 'date-fns';
   import { extent } from 'd3-array';
 
-  import { Card, promiseStore } from 'svelte-ux';
+  import { Card, promiseStore, sortFunc } from 'svelte-ux';
   import { Axis, Chart, Highlight, Spline, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
-  import { createPropertySortFunc } from 'svelte-ux/utils/sort';
   import { metersToMiles } from '$lib/utils.js';
 
   export let data;
@@ -42,7 +41,7 @@
         <Svg>
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
           <Axis placement="bottom" rule ticks={0} />
-          {#each data.valuesByYear.sort(createPropertySortFunc((d) => d[0])) as [year, yearData], i}
+          {#each data.valuesByYear.sort(sortFunc((d) => d[0])) as [year, yearData], i}
             {@const color =
               tooltip.data == null || tooltip.data.start_date.getFullYear() === year
                 ? colorScale(year)
