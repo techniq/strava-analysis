@@ -35,7 +35,7 @@
         yDomain={[0, null]}
         yNice
         padding={{ left: 32, bottom: 24, right: 32 }}
-        tooltip={{ mode: 'voronoi', snapToDataX: true, snapToDataY: true }}
+        tooltip={{ mode: 'voronoi' }}
         let:tooltip
       >
         <Svg>
@@ -62,7 +62,12 @@
           {/each}
           <Highlight points={{ class: 'fill-black' }} lines />
         </Svg>
-        <Tooltip header={(data) => format(data.start_date, 'MM/dd/yyyy')} let:data>
+        <Tooltip
+          x="data"
+          y="data"
+          header={(data) => format(data.start_date, 'MM/dd/yyyy')}
+          let:data
+        >
           <TooltipItem
             label="Distance"
             value={metersToMiles(data.distance)}

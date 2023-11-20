@@ -37,7 +37,7 @@
         yDomain={[0, null]}
         yNice
         padding={{ left: 32, bottom: 24, right: 16 }}
-        tooltip={{ mode: 'bisect-x', snapToDataX: true, snapToDataY: true }}
+        tooltip={{ mode: 'bisect-x' }}
       >
         <Svg>
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
@@ -47,7 +47,12 @@
           </LinearGradient>
           <Highlight points={{ class: 'fill-blue-500' }} lines />
         </Svg>
-        <Tooltip header={(data) => format(data.start_date, 'eee, MMMM do')} let:data>
+        <Tooltip
+          x="data"
+          y="data"
+          header={(data) => format(data.start_date, 'eee, MMMM do')}
+          let:data
+        >
           <TooltipItem
             label="Distance"
             value={metersToMiles(data.distance)}

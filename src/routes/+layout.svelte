@@ -1,6 +1,6 @@
 <script lang="ts">
   import { inject } from '@vercel/analytics';
-  import { AppLayout, ViewportCenter, Card, Button, createTheme, AppBar, Tooltip } from 'svelte-ux';
+  import { AppLayout, ViewportCenter, Card, Button, AppBar, Tooltip } from 'svelte-ux';
   import { mdiGithub, mdiLogin, mdiTwitter } from '@mdi/js';
 
   import { athlete } from '$lib/stores';
@@ -11,10 +11,6 @@
   export let data;
 
   inject({ mode: dev ? 'development' : 'production' });
-
-  createTheme({
-    //
-  });
 
   $athlete = data.athlete;
 </script>
