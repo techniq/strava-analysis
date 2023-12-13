@@ -12,8 +12,7 @@
     "up-deps": "pnpm update -r -i --latest"
   },
   "devDependencies": {
-    "@sveltejs/adapter-netlify": "^2.0.8",
-    "@sveltejs/adapter-vercel": "^3.1.0",
+    "@sveltejs/adapter-cloudflare": "^2.3.4",
     "@sveltejs/kit": "^1.27.6",
     "@types/cookies": "^0.7.10",
     "@types/d3-array": "^3.2.1",
