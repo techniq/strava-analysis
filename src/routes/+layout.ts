@@ -1,9 +1,21 @@
-import { Strava } from '$lib/api';
+import posthog from 'posthog-js';
 import { redirect } from '@sveltejs/kit';
+
+import { browser, dev } from '$app/environment';
+import { Strava } from '$lib/api';
 
 export const ssr = false;
 
 export async function load({ data }) {
+  // Setup Posthog
+  if (browser && !dev) {
+    posthog.init('phc_2DlGpLLUesUDo4WL3HtGQoGkS49m3fOVjThufrAP2pV', {
+      api_host: 'https://app.posthog.com',
+      capture_pageview: false,
+      capture_pageleave: false
+    });
+  }
+
   let athlete: any = null;
   if (data.accessToken) {
     const strava = new Strava(data.accessToken);

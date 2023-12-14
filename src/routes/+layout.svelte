@@ -1,18 +1,44 @@
 <script lang="ts">
-  import { inject } from '@vercel/analytics';
+  import { onMount } from 'svelte';
+  import posthog from 'posthog-js';
   import { AppLayout, ViewportCenter, Card, Button, AppBar, Tooltip } from 'svelte-ux';
   import { mdiGithub, mdiLogin, mdiTwitter } from '@mdi/js';
 
   import { athlete } from '$lib/stores';
   import { dev } from '$app/environment';
+  import { page } from '$app/stores';
 
   import NavMenu from './_NavMenu.svelte';
 
   export let data;
 
-  inject({ mode: dev ? 'development' : 'production' });
-
   $athlete = data.athlete;
+
+  let currentPath = '';
+  onMount(() => {
+    // Posthog analytics
+    if (!dev) {
+      const unsubscribePage = page.subscribe(($page) => {
+        if (currentPath && currentPath !== $page.url.pathname) {
+          // Page navigated away
+          posthog.capture('$pageleave');
+        }
+
+        // Page entered
+        currentPath = $page.url.pathname;
+        posthog.capture('$pageview');
+      });
+      const handleBeforeUnload = () => {
+        // Hard reloads or browser exit
+        posthog.capture('$pageleave');
+      };
+      window.addEventListener('beforeunload', handleBeforeUnload);
+      return () => {
+        unsubscribePage();
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      };
+    }
+  });
 </script>
 
 {#if !data.accessToken}

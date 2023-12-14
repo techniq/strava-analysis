@@ -11,9 +11,6 @@ dependencies:
   '@types/d3-scale-chromatic':
     specifier: ^3.0.2
     version: 3.0.2
-  '@vercel/analytics':
-    specifier: ^1.1.1
-    version: 1.1.1
   d3-array:
     specifier: ^3.2.4
     version: 3.2.4
@@ -32,6 +29,9 @@ dependencies:
   layerchart:
     specifier: ^0.26.0
     version: 0.26.0(@fortawesome/free-regular-svg-icons@6.4.2)(@fortawesome/free-solid-svg-icons@6.4.2)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7)(typescript@5.2.2)
+  posthog-js:
+    specifier: ^1.95.1
+    version: 1.95.1
   svelte-ux:
     specifier: ^0.56.0
     version: 0.56.0(@fortawesome/free-regular-svg-icons@6.4.2)(@fortawesome/free-solid-svg-icons@6.4.2)(@mdi/js@7.3.67)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7)
@@ -1701,6 +1701,10 @@ packages:
     dependencies:
       reusify: 1.0.4
 
+  /fflate@0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
+    dev: false
+
   /file-source@0.6.1:
     resolution: {integrity: sha512-1R1KneL7eTXmXfKxC10V/9NeGOdbsAXJ+lQ//fvvcHUgtaZcZDWNJNblxAoVOyV1cj45pOtUrR3vZTBwqcW8XA==}
     dependencies:
@@ -2722,6 +2726,12 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /posthog-js@1.95.1:
+    resolution: {integrity: sha512-79HPLoBqENBEEGFhn+hueKliYH66Qbu4WcRTEd8WaqtvqHrK9qAQkcrShZNkg1V5vM4kHp0iMIkJYBXg1sq06Q==}
+    dependencies:
+      fflate: 0.4.8
+    dev: false
 
   /preferred-pm@3.1.2:
     resolution: {integrity: sha512-nk7dKrcW8hfCZ4H6klWcdRknBOXWzNQByJ0oJyX97BOupsYD+FzLS4hflgEu/uPUEHZCuRfMxzCBsuWd7OzT8Q==}
