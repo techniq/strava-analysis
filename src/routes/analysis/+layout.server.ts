@@ -25,7 +25,6 @@ export async function load({ locals, setHeaders }) {
 
     const startDateExtent = extent(activities, (d) => d.start_date);
 
-    const sportTypeOrder = ['Run', 'Ride', 'VirtualRide', 'Walk', 'Workout'];
     const activitiesBySportType = flatRollup(
       activities,
       (values) => {
@@ -44,7 +43,7 @@ export async function load({ locals, setHeaders }) {
         };
       },
       (d) => d.sport_type
-    ).sort(sortFunc((d) => sportTypeOrder.indexOf(d[0])));
+    ).sort(sortFunc((d) => d[1].values.length, 'desc'));
 
     function addTotalDistance(values: any[]) {
       return zip(
