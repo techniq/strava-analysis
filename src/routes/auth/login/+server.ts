@@ -11,5 +11,5 @@ export function GET() {
   params.append('approval_prompt', 'auto');
   params.append('scope', 'read_all,profile:read_all,activity:read_all');
 
-  throw redirect(302, `https://www.strava.com/oauth/authorize?${params}`);
+  redirect(302, `https://www.strava.com/oauth/authorize?${params}`);
 }

@@ -23,7 +23,7 @@ export async function load({ data }) {
     if (athlete.errors) {
       const [error] = athlete.errors;
       if (error.field === 'access_token' && error.code === 'invalid') {
-        throw redirect(302, '/auth/login');
+        redirect(302, '/auth/login');
       }
     }
   }

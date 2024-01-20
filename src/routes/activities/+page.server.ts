@@ -15,9 +15,9 @@ export async function load({ locals, url, setHeaders }) {
 
   return {
     streamed: {
-      activities: strava.api('/athlete/activities', { data: { per_page, page } })
+      activities: await strava.api('/athlete/activities', { data: { per_page, page } })
     },
-    stats: strava.api(`/athletes/${athleteId}/stats`),
+    stats: await strava.api(`/athletes/${athleteId}/stats`),
     params: {
       athleteId,
       per_page,

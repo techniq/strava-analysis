@@ -22,7 +22,7 @@ export async function GET({ url, locals, cookies }) {
   cookies.set('athlete', athlete.id || '', cookieOptions);
   cookies.set('accessToken', access_token || '', cookieOptions);
 
-  throw redirect(302, '/');
+  redirect(302, '/');
 }
 
 /**
