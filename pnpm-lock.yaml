@@ -38,11 +38,14 @@ dependencies:
 
 devDependencies:
   '@sveltejs/adapter-cloudflare':
-    specifier: ^4.1.0
-    version: 4.1.0(@sveltejs/kit@2.4.1)
+    specifier: ^3.0.0
+    version: 3.0.0(@sveltejs/kit@2.4.1)
   '@sveltejs/kit':
     specifier: ^2.4.1
     version: 2.4.1(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.9)(vite@5.0.12)
+  '@sveltejs/vite-plugin-svelte':
+    specifier: ^3.0.0
+    version: 3.0.1(svelte@4.2.9)(vite@5.0.12)
   '@types/cookies':
     specifier: ^0.7.10
     version: 0.7.10
@@ -756,15 +759,15 @@ packages:
     dev: true
     optional: true
 
-  /@sveltejs/adapter-cloudflare@4.1.0(@sveltejs/kit@2.4.1):
-    resolution: {integrity: sha512-AQQdZAZpcFDcBiMEmxbMYhn4yKZYoPZrKUrYpVejjbO+9obIGIuj/jWjVzAEkHqZMZuoRRqPbq+Zq+AWRm4x1Q==}
+  /@sveltejs/adapter-cloudflare@3.0.0(@sveltejs/kit@2.4.1):
+    resolution: {integrity: sha512-McUuRy7cOZ/DNykW9DbcZjj+IKx2JmFPRqbZMpk5kwfpq5ay70JprRkpEcnSdYMEoNmp8C2xUHf43ha394dZuQ==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
       '@cloudflare/workers-types': 4.20240117.0
       '@sveltejs/kit': 2.4.1(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.9)(vite@5.0.12)
       esbuild: 0.19.11
-      worktop: 0.8.0-next.18
+      worktop: 0.8.0-next.15
     dev: true
 
   /@sveltejs/kit@2.4.1(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.9)(vite@5.0.12):
@@ -2553,6 +2556,11 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /mrmime@1.0.1:
+    resolution: {integrity: sha512-hzzEagAgDyoU1Q6yg5uI+AorQgdvMCur3FcKf7NhMKWsaYg+RnbTyHRa/9IlLF9rf455MOCtcqqrQQ83pPP7Uw==}
+    engines: {node: '>=10'}
+    dev: true
+
   /mrmime@2.0.0:
     resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==}
     engines: {node: '>=10'}
@@ -2976,8 +2984,8 @@ packages:
       set-function-name: 2.0.1
     dev: false
 
-  /regexparam@3.0.0:
-    resolution: {integrity: sha512-RSYAtP31mvYLkAHrOlh25pCNQ5hWnT106VukGaaFfuJrZFkGRX5GhUAdPqpSDXxOhA2c4akmRuplv1mRqnBn6Q==}
+  /regexparam@2.0.2:
+    resolution: {integrity: sha512-A1PeDEYMrkLrfyOwv2jwihXbo9qxdGD3atBYQA9JJgreAx8/7rC6IUkWOw2NQlOxLp2wL0ifQbh1HuidDfYA6w==}
     engines: {node: '>=8'}
     dev: true
 
@@ -3899,12 +3907,12 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /worktop@0.8.0-next.18:
-    resolution: {integrity: sha512-+TvsA6VAVoMC3XDKR5MoC/qlLqDixEfOBysDEKnPIPou/NvoPWCAuXHXMsswwlvmEuvX56lQjvELLyLuzTKvRw==}
+  /worktop@0.8.0-next.15:
+    resolution: {integrity: sha512-0ycNO52P6nVwsjr1y20zuf0nqJatAb8L7MODBfQIxbxndHV5O4s50oZZMHWhJG1RLpHwbK0Epq8aaQK4E2GlgQ==}
     engines: {node: '>=12'}
     dependencies:
-      mrmime: 2.0.0
-      regexparam: 3.0.0
+      mrmime: 1.0.1
+      regexparam: 2.0.2
     dev: true
 
   /wrap-ansi@6.2.0:
