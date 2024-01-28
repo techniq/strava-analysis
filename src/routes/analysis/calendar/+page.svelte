@@ -58,7 +58,13 @@
         r={(d) => d.distance}
         rScale={scaleThreshold().unknown('transparent')}
         rDomain={[1, 3, 6, 12]}
-        rRange={schemeGreens[5]}
+        rRange={[
+          'hsl(var(--color-secondary-100))',
+          'hsl(var(--color-secondary-300))',
+          'hsl(var(--color-secondary-500))',
+          'hsl(var(--color-secondary-700))',
+          'hsl(var(--color-secondary-900))'
+        ]}
         padding={{ left: 40, top: 16 }}
         tooltip={{ mode: 'manual' }}
         let:tooltip

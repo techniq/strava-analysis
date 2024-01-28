@@ -8,7 +8,7 @@
 </script>
 
 <main>
-  <div class="bg-white">
+  <div class="bg-surface-100">
     <ToggleGroup
       value={$page.route.id}
       variant="underline"
@@ -32,8 +32,8 @@
   {#await data.streamed.activities}
     <Card class="h-[300px] m-4 grid items-center justify-center">
       <div class="grid gap-4 justify-items-center">
-        <ProgressCircle class="text-orange-500" />
-        <span class="text-orange-900">
+        <ProgressCircle class="text-primary" />
+        <span class="text-primary-700">
           Loading {format(data.totalActivities, 'integer')} activities...
         </span>
       </div>

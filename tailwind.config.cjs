@@ -7,38 +7,31 @@ module.exports = {
     './node_modules/svelte-ux/**/*.{svelte,js}',
     './node_modules/layerchart/**/*.{svelte,js}'
   ],
-  theme: {
-    extend: {
-      colors: {
-        'color-var': 'var(--color)',
-        accent: colors.orange
-      }
-    }
-  },
-  variants: {
-    extend: {}
+  ux: {
+    themes: {
+      light: {
+        primary: colors['orange']['500'],
+        'primary-content': 'white',
+        secondary: colors['blue']['500'],
+        'surface-100': 'white',
+        'surface-200': colors['gray']['100'],
+        'surface-300': colors['gray']['300'],
+        'surface-content': colors['gray']['900'],
+        'color-scheme': 'light'
+      },
+      dark: {
+        primary: colors['orange']['500'],
+        'primary-content': 'white',
+        secondary: colors['blue']['500'],
+        'surface-100': colors['zinc']['800'],
+        'surface-200': colors['zinc']['900'],
+        'surface-300': colors['zinc']['950'],
+        'surface-content': colors['zinc']['100'],
+        'color-scheme': 'dark'
+      },
+    },
   },
   plugins: [
-    require('svelte-ux/plugins/tailwind.cjs'),
-
-    // Expose color palette as CSS variables (--color-xxx-yyy) - https://gist.github.com/Merott/d2a19b32db07565e94f10d13d11a8574
-    plugin(function ({ addBase, theme }) {
-      function extractColorVars(colorObj, colorGroup = '') {
-        return Object.keys(colorObj).reduce((vars, colorKey) => {
-          const value = colorObj[colorKey];
-
-          const newVars =
-            typeof value === 'string'
-              ? { [`--color${colorGroup}-${colorKey}`]: value }
-              : extractColorVars(value, `-${colorKey}`);
-
-          return { ...vars, ...newVars };
-        }, {});
-      }
-
-      addBase({
-        ':root': extractColorVars(theme('colors'))
-      });
-    })
+    require('svelte-ux/plugins/tailwind.cjs'), // Can also call it with colorSpace options
   ]
 };

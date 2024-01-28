@@ -104,7 +104,7 @@
                   cx={point.x}
                   cy={point.y}
                   r={rScale(count)}
-                  class="fill-emerald-500 stroke-emerald-600"
+                  class="fill-secondary stroke-secondary-600"
                 />
                 <Text
                   x={point.x}
@@ -112,7 +112,7 @@
                   value={count}
                   textAnchor="middle"
                   verticalAnchor="middle"
-                  class="stroke-emerald-800 fill-white text-xs stroke-2 transition-all opacity-0 group-hover:opacity-100"
+                  class="stroke-secondary-800 fill-white text-xs stroke-2 transition-all opacity-0 group-hover:opacity-100"
                   capHeight=".6rem"
                 />
               {/each}
@@ -220,7 +220,7 @@
                   cx={point.x}
                   cy={point.y}
                   r={rScale(count)}
-                  class="fill-emerald-500 stroke-emerald-600"
+                  class="fill-secondary-500 stroke-secondary-600"
                 />
                 <Text
                   x={point.x}
@@ -228,7 +228,7 @@
                   value={count}
                   textAnchor="middle"
                   verticalAnchor="middle"
-                  class="stroke-emerald-800 fill-white text-xs stroke-2 transition-all opacity-0 group-hover:opacity-100"
+                  class="stroke-secondary-800 fill-white text-xs stroke-2 transition-all opacity-0 group-hover:opacity-100"
                   capHeight=".6rem"
                 />
               {/each}

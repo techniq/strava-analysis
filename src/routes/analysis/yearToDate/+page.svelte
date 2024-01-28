@@ -45,7 +45,7 @@
             {@const color =
               tooltip.data == null || tooltip.data.start_date.getFullYear() === year
                 ? colorScale(year)
-                : '#ddd'}
+                : 'hsl(var(--color-surface-content) / 20%)'}
             <Spline data={yearData.values} width={2} stroke={color}>
               <svelte:fragment slot="end">
                 <circle r={3} fill={color} />
@@ -54,7 +54,7 @@
                   value={year}
                   dx={4}
                   dy={-2}
-                  class="text-xs stroke-white stroke-2"
+                  class="text-xs stroke-surface-100 stroke-2"
                   style="fill:{color}"
                 />
               </svelte:fragment>

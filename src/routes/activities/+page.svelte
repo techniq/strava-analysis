@@ -6,15 +6,14 @@
     Duration,
     Pagination,
     Table,
-    dateDisplay,
     format,
     tableCell,
     paginationStore,
     changeStore,
     Icon,
-    promiseStore
+    promiseStore,
+    PeriodType
   } from 'svelte-ux';
-  import { getCellValue, getCellContent } from 'svelte-ux/utils/table';
 
   import { goto } from '$app/navigation';
   import { metersToFeet, metersToMiles } from '$lib/utils.js';
@@ -83,7 +82,7 @@
           {
             name: 'start_date',
             header: 'Date',
-            format: (value) => dateDisplay(value, { format: 'M/d/yy' }),
+            format: (value) => format(value, PeriodType.Day),
             align: 'right',
             class: {
               data: 'w-[100px]'
@@ -93,7 +92,7 @@
             name: 'start_date-time',
             header: 'Time',
             value: (d) => d.start_date,
-            format: (value) => dateDisplay(value, { format: 'h:mm a' }),
+            format: (value) => format(value, PeriodType.TimeOnly),
             align: 'right',
             class: {
               data: 'w-[100px]'
@@ -105,7 +104,7 @@
             format: (value) => format(metersToMiles(value), 'decimal') + ' mi',
             align: 'right',
             dataBackground: {
-              color: 'var(--color-blue-100)',
+              color: 'hsl(var(--color-secondary) / 10%)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
@@ -116,7 +115,7 @@
             format: (value) => format(metersToFeet(value), 'integer') + ' ft',
             align: 'right',
             dataBackground: {
-              color: 'var(--color-blue-100)',
+              color: 'hsl(var(--color-secondary) / 10%)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
@@ -125,7 +124,7 @@
             name: 'moving_time',
             header: 'Duration',
             dataBackground: {
-              color: 'var(--color-blue-100)',
+              color: 'hsl(var(--color-secondary) / 10%)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
@@ -136,7 +135,7 @@
             value: (d) =>
               d.distance ? Math.round(d.moving_time / metersToMiles(d.distance)) : null,
             dataBackground: {
-              color: 'var(--color-blue-100)',
+              color: 'hsl(var(--color-secondary) / 10%)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
@@ -167,7 +166,7 @@
                   data: 'w-[100px]'
                 },
                 dataBackground: {
-                  color: 'var(--color-red-100)',
+                  color: 'hsl(var(--color-danger) / 10%)',
                   inset: [1, 2],
                   tweened: { duration: 300 },
                   domain: [120, 160]
@@ -181,7 +180,7 @@
                   data: 'w-[100px]'
                 },
                 dataBackground: {
-                  color: 'var(--color-red-100)',
+                  color: 'hsl(var(--color-danger) / 10%)',
                   inset: [1, 2],
                   tweened: { duration: 300 },
                   domain: [150, 180]
@@ -194,18 +193,18 @@
             header: 'Kudos',
             align: 'right',
             dataBackground: {
-              color: 'var(--color-orange-100)',
+              color: 'hsl(var(--color-primary) / 10%)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
           }
         ]}
         classes={{
-          th: 'px-2 bg-orange-100 border-b border-r border-orange-200 text-orange-800 text-sm',
+          th: 'px-2 bg-primary/10 border-b border-r border-primary/20 text-primary-800 text-sm',
           td: 'px-2 whitespace-nowrap tabular-nums'
         }}
       >
-        <tbody slot="data" let:columns let:data>
+        <tbody slot="data" let:columns let:data let:getCellValue let:getCellContent>
           {#each data ?? [] as rowData, rowIndex}
             <tr>
               {#each columns as column (column.name)}
