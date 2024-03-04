@@ -20,7 +20,8 @@
       .flatMap((d) => d.valuesByYear)
       .flatMap((d) => d[0])
   );
-  $: colorScale = scaleSequential(interpolateTurbo).domain(yearsDomain);
+  // Remove year to skip black color
+  $: colorScale = scaleSequential(interpolateTurbo).domain([yearsDomain[0] - 1, yearsDomain[1]]);
 </script>
 
 <div class="grid gap-4 p-4">
