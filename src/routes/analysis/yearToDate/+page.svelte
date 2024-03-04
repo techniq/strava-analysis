@@ -1,10 +1,10 @@
 <script lang="ts">
   import { scaleSequential, scaleTime } from 'd3-scale';
   import { interpolateTurbo } from 'd3-scale-chromatic';
-  import { format, getDayOfYear } from 'date-fns';
-  import { extent } from 'd3-array';
+  import { getDayOfYear } from 'date-fns';
+  import { extent, range } from 'd3-array';
 
-  import { Card, promiseStore, sortFunc } from 'svelte-ux';
+  import { Card, PeriodType, promiseStore, sortFunc, format } from 'svelte-ux';
   import { Axis, Chart, Highlight, Spline, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
   import { metersToMiles } from '$lib/utils.js';
 
@@ -41,7 +41,12 @@
       >
         <Svg>
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
-          <Axis placement="bottom" rule ticks={0} />
+          <Axis
+            placement="bottom"
+            rule
+            ticks={range(0, 12).map((m) => getDayOfYear(new Date(2024, m, 1)))}
+            format={(v) => format(new Date(2024, 0, v), PeriodType.Month)}
+          />
           {#each data.valuesByYear.sort(sortFunc((d) => d[0])) as [year, yearData], i}
             {@const color =
               tooltip.data == null || tooltip.data.start_date.getFullYear() === year
@@ -66,7 +71,7 @@
         <Tooltip
           x="data"
           y="data"
-          header={(data) => format(data.start_date, 'MM/dd/yyyy')}
+          header={(data) => format(data.start_date, PeriodType.Day)}
           let:data
         >
           <TooltipItem
