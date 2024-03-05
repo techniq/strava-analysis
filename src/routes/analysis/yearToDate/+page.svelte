@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { linear } from 'svelte/easing';
   import { scaleSequential, scaleTime } from 'd3-scale';
   import { interpolateTurbo } from 'd3-scale-chromatic';
   import { getDayOfYear } from 'date-fns';
@@ -52,7 +53,12 @@
               tooltip.data == null || tooltip.data.start_date.getFullYear() === year
                 ? colorScale(year)
                 : 'hsl(var(--color-surface-content) / 20%)'}
-            <Spline data={yearData.values} width={2} stroke={color}>
+            <Spline
+              data={yearData.values}
+              width={2}
+              stroke={color}
+              draw={{ duration: 8000, easing: linear }}
+            >
               <svelte:fragment slot="end">
                 <circle r={3} fill={color} />
                 <Text
