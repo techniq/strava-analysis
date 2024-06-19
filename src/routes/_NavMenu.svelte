@@ -17,12 +17,12 @@
     </div>
   {/if}
 
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Tooltip title="Sign out">
       <Button icon={mdiExitRun} on:click={toggle} class="p-1 m-1 transition-none" />
     </Tooltip>
 
-    <Dialog {open} on:close={toggle}>
+    <Dialog {open} on:close={toggleOff}>
       <div slot="title">Sign out</div>
       <div class="p-4">Are you sure you want to sign out?</div>
 
