@@ -9,7 +9,7 @@
     AppBar,
     Tooltip,
     settings,
-    ThemeSwitch
+    ThemeSelect
   } from 'svelte-ux';
   import { mdiGithub, mdiLogin, mdiTwitter } from '@mdi/js';
 
@@ -95,7 +95,7 @@
 
     <AppBar title="Strava Analysis">
       <div slot="actions" class="flex gap-3 items-center">
-        <ThemeSwitch classes={{ switch: 'bg-surface-300/20 border-none' }} />
+        <ThemeSelect />
         <Tooltip title="Open Twitter / X" placement="left" offset={2}>
           <Button
             icon={mdiTwitter}
