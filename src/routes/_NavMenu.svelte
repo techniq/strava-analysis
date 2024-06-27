@@ -7,8 +7,12 @@
   import { page } from '$app/stores';
 </script>
 
-<NavItem currentUrl={$page.url} class="pl-4 border-b">
-  <img src={$athlete.profile} class="w-10 h-10 rounded-full mr-4 border border-surface-300" />
+<NavItem path="" currentUrl={$page.url} class="pl-4 border-b">
+  <img
+    src={$athlete.profile}
+    class="w-10 h-10 rounded-full mr-4 border border-surface-300"
+    alt="profile"
+  />
 
   {#if $athlete}
     <div class="flex-grow">
