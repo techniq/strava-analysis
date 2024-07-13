@@ -10,6 +10,12 @@ export async function load({ locals, setHeaders }) {
 
   // Determine how many total pages of activities to fetch
   const stats = await strava.api(`/athletes/${athlete}/stats`);
+
+  if (stats.message === 'Authorization Error') {
+    // Require (re)authorization
+    return;
+  }
+
   const totalActivities =
     stats.all_run_totals.count + stats.all_ride_totals.count + stats.all_swim_totals.count;
   const per_page = 200; // Strava limit
