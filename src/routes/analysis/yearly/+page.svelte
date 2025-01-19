@@ -2,17 +2,10 @@
   import { scaleTime } from 'd3-scale';
   import { format } from 'date-fns';
 
-  import { Card, promiseStore } from 'svelte-ux';
-  import {
-    Area,
-    Axis,
-    Chart,
-    Highlight,
-    LinearGradient,
-    Svg,
-    Tooltip,
-    TooltipItem
-  } from 'layerchart';
+  import { Card } from 'svelte-ux';
+  import { Area, Axis, Chart, Highlight, LinearGradient, Svg, Tooltip } from 'layerchart';
+  import { promiseStore } from '@layerstack/svelte-stores';
+
   import { metersToMiles } from '$lib/utils.js';
 
   export let data;
@@ -40,36 +33,34 @@
         <Svg>
           <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
           <Axis placement="bottom" grid rule />
-          <LinearGradient class="from-blue-500/50 to-blue-500/10" vertical let:url>
+          <LinearGradient class="from-blue-500/50 to-blue-500/10" vertical let:gradient>
             {#each data.valuesByYear as [year, yearData]}
               <Area
                 data={yearData.values}
                 line={{ class: 'stroke-2 stroke-blue-500' }}
-                fill={url}
+                fill={gradient}
               />
             {/each}
           </LinearGradient>
           <Highlight points={{ class: 'fill-blue-500' }} lines />
         </Svg>
-        <Tooltip
-          x="data"
-          y="data"
-          header={(data) => format(data.start_date, 'eee, MMMM do')}
-          let:data
-        >
-          <TooltipItem
-            label="Distance"
-            value={metersToMiles(data.distance)}
-            format="decimal"
-            valueAlign="right"
-          />
-          <TooltipItem
-            label="Total Distance"
-            value={metersToMiles(data.totalDistance)}
-            format="decimal"
-            valueAlign="right"
-          />
-        </Tooltip>
+        <Tooltip.Root x="data" y="data" let:data>
+          <Tooltip.Header>{format(data.start_date, 'eee, MMMM do')}</Tooltip.Header>
+          <Tooltip.List>
+            <Tooltip.Item
+              label="Distance"
+              value={metersToMiles(data.distance)}
+              format="decimal"
+              valueAlign="right"
+            />
+            <Tooltip.Item
+              label="Total Distance"
+              value={metersToMiles(data.totalDistance)}
+              format="decimal"
+              valueAlign="right"
+            />
+          </Tooltip.List>
+        </Tooltip.Root>
       </Chart>
     </Card>
   {/each}

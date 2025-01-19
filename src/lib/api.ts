@@ -1,4 +1,4 @@
-import { parse } from 'svelte-ux';
+import { parse } from '@layerstack/utils';
 
 type ApiOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';

@@ -4,8 +4,11 @@
   import { flatRollup, range, sum } from 'd3-array';
   import { schemeGreens } from 'd3-scale-chromatic';
 
-  import { Card, PeriodType, promiseStore, format, sortFunc } from 'svelte-ux';
-  import { Calendar, Chart, Group, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
+  import { Card } from 'svelte-ux';
+  import { Calendar, Chart, Group, Svg, Text, Tooltip } from 'layerchart';
+  import { format, PeriodType, sortFunc } from '@layerstack/utils';
+  import { promiseStore } from '@layerstack/svelte-stores';
+
   import { metersToMiles } from '$lib/utils.js';
 
   export let data;
@@ -55,10 +58,10 @@
       <Chart
         data={chartData}
         x={(d) => d.date}
-        r={(d) => d.distance}
-        rScale={scaleThreshold().unknown('transparent')}
-        rDomain={[1, 3, 6, 12]}
-        rRange={[
+        c={(d) => d.distance}
+        cScale={scaleThreshold().unknown('transparent')}
+        cDomain={[1, 3, 6, 12]}
+        cRange={[
           'hsl(var(--color-secondary-100))',
           'hsl(var(--color-secondary-300))',
           'hsl(var(--color-secondary-500))',
@@ -88,11 +91,20 @@
           {/each}
         </Svg>
 
-        <Tooltip header={(d) => format(d.date, PeriodType.Day)} let:data>
+        <Tooltip.Root let:data>
+          {format(data.date, PeriodType.Day)}
+
           {#if data.distance != null}
-            <TooltipItem label="miles" value={data.distance} format="decimal" valueAlign="right" />
+            <Tooltip.List>
+              <Tooltip.Item
+                label="miles"
+                value={data.distance}
+                format="decimal"
+                valueAlign="right"
+              />
+            </Tooltip.List>
           {/if}
-        </Tooltip>
+        </Tooltip.Root>
       </Chart>
     </Card>
   {/each}

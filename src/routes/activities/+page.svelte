@@ -1,19 +1,10 @@
 <script lang="ts">
   import { mdiFlagCheckered } from '@mdi/js';
 
-  import {
-    Card,
-    Duration,
-    Pagination,
-    Table,
-    format,
-    tableCell,
-    paginationStore,
-    changeStore,
-    Icon,
-    promiseStore,
-    PeriodType
-  } from 'svelte-ux';
+  import { Card, Duration, Pagination, Table, Icon } from 'svelte-ux';
+  import { format, PeriodType } from '@layerstack/utils';
+  import { changeStore, paginationStore, promiseStore } from '@layerstack/svelte-stores';
+  import { tableCell } from '@layerstack/svelte-table';
 
   import { goto } from '$app/navigation';
   import { metersToFeet, metersToMiles } from '$lib/utils.js';
@@ -67,8 +58,8 @@
           {
             name: 'sport_type',
             header: 'Type',
-            class: {
-              data: 'w-[80px]'
+            classes: {
+              td: 'w-[80px]'
             }
           },
           {
@@ -84,8 +75,8 @@
             header: 'Date',
             format: (value) => format(value, PeriodType.Day),
             align: 'right',
-            class: {
-              data: 'w-[100px]'
+            classes: {
+              td: 'w-[100px]'
             }
           },
           {
@@ -94,8 +85,8 @@
             value: (d) => d.start_date,
             format: (value) => format(value, PeriodType.TimeOnly),
             align: 'right',
-            class: {
-              data: 'w-[100px]'
+            classes: {
+              td: 'w-[100px]'
             }
           },
           {
@@ -162,8 +153,8 @@
                 name: 'average_heartrate',
                 header: 'Avg',
                 format: (value) => (value ? `${value} bpm` : ''),
-                class: {
-                  data: 'w-[100px]'
+                classes: {
+                  td: 'w-[100px]'
                 },
                 dataBackground: {
                   color: 'hsl(var(--color-danger) / 10%)',
@@ -176,8 +167,8 @@
                 name: 'max_heartrate',
                 header: 'Max',
                 format: (value) => (value ? `${value} bpm` : ''),
-                class: {
-                  data: 'w-[100px]'
+                classes: {
+                  td: 'w-[100px]'
                 },
                 dataBackground: {
                   color: 'hsl(var(--color-danger) / 10%)',
@@ -238,7 +229,11 @@
         {pagination}
         perPageOptions={[10, 25, 100, 200]}
         show={['perPage', 'pagination', 'prevPage', 'nextPage']}
-        classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+        classes={{
+          root: 'border-t py-1 mt-2 sticky left-0',
+          perPage: 'flex-1 text-right',
+          pagination: 'px-8'
+        }}
       />
     </Card>
   </div>

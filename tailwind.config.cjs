@@ -1,5 +1,5 @@
 const colors = require('tailwindcss/colors');
-const svelteUx = require('svelte-ux/plugins/tailwind.cjs');
+const layerstack = require('@layerstack/tailwind/plugin');
 
 module.exports = {
   content: [
@@ -29,5 +29,5 @@ module.exports = {
       }
     }
   },
-  plugins: [svelteUx]
+  plugins: [layerstack]
 };

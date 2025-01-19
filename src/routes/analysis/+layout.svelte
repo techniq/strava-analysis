@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Card, ProgressCircle, ToggleGroup, ToggleOption, format } from 'svelte-ux';
+  import { Card, ProgressCircle, ToggleGroup, ToggleOption } from 'svelte-ux';
+  import { format } from '@layerstack/utils';
 
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';

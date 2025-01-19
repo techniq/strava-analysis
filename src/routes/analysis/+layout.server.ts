@@ -1,5 +1,5 @@
 import { cumsum, extent, flatRollup, zip, range } from 'd3-array';
-import { sortFunc } from 'svelte-ux';
+import { sortFunc } from '@layerstack/utils';
 
 import { Strava } from '$lib/api.js';
 

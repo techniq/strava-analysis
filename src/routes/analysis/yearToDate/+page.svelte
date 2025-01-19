@@ -5,8 +5,10 @@
   import { getDayOfYear } from 'date-fns';
   import { extent, range } from 'd3-array';
 
-  import { Card, PeriodType, promiseStore, sortFunc, format } from 'svelte-ux';
-  import { Axis, Chart, Highlight, Spline, Svg, Text, Tooltip, TooltipItem } from 'layerchart';
+  import { Card } from 'svelte-ux';
+  import { Axis, Chart, Highlight, Spline, Svg, Text, Tooltip } from 'layerchart';
+  import { PeriodType, sortFunc, format } from '@layerstack/utils';
+  import { promiseStore } from '@layerstack/svelte-stores';
   import { metersToMiles } from '$lib/utils.js';
 
   export let data;
@@ -74,25 +76,24 @@
           {/each}
           <Highlight points={{ class: 'fill-black' }} lines />
         </Svg>
-        <Tooltip
-          x="data"
-          y="data"
-          header={(data) => format(data.start_date, PeriodType.Day)}
-          let:data
-        >
-          <TooltipItem
-            label="Distance"
-            value={metersToMiles(data.distance)}
-            format="decimal"
-            valueAlign="right"
-          />
-          <TooltipItem
-            label="Total Distance"
-            value={metersToMiles(data.totalDistance)}
-            format="decimal"
-            valueAlign="right"
-          />
-        </Tooltip>
+
+        <Tooltip.Root x="data" y="data" let:data>
+          <Tooltip.Header>{format(data.start_date, PeriodType.Day)}</Tooltip.Header>
+          <Tooltip.List>
+            <Tooltip.Item
+              label="Distance"
+              value={metersToMiles(data.distance)}
+              format="decimal"
+              valueAlign="right"
+            />
+            <Tooltip.Item
+              label="Total Distance"
+              value={metersToMiles(data.totalDistance)}
+              format="decimal"
+              valueAlign="right"
+            />
+          </Tooltip.List>
+        </Tooltip.Root>
       </Chart>
     </Card>
   {/each}

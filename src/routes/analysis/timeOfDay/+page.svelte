@@ -3,20 +3,10 @@
   import { getDay, getHours } from 'date-fns';
   import { flatRollup, max, mean, range, sum } from 'd3-array';
 
-  import { Card, format, humanizeDuration, promiseStore } from 'svelte-ux';
-  import {
-    Axis,
-    Bars,
-    Chart,
-    Circle,
-    Highlight,
-    Points,
-    Svg,
-    Text,
-    Tooltip,
-    TooltipItem,
-    TooltipSeparator
-  } from 'layerchart';
+  import { Card } from 'svelte-ux';
+  import { Axis, Bars, Chart, Circle, Highlight, Points, Svg, Text, Tooltip } from 'layerchart';
+  import { format, humanizeDuration } from '@layerstack/utils';
+  import { promiseStore } from '@layerstack/svelte-stores';
   import { metersToFeet, metersToMiles } from '$lib/utils.js';
 
   export let data;
@@ -121,11 +111,7 @@
             <Highlight area axis="y" />
           </Svg>
 
-          <Tooltip
-            class="whitespace-nowrap"
-            header={(d) => `${daysOfWeek[d[0]]} @ ${d[1]}:00`}
-            let:data
-          >
+          <Tooltip.Root class="whitespace-nowrap" let:data>
             {@const [
               dayOfWeek,
               timeOfDay,
@@ -139,50 +125,57 @@
                 totalElevation
               }
             ] = data}
-            <TooltipItem label="Count" value={count} valueAlign="right" />
 
-            <TooltipSeparator />
-            <TooltipItem
-              label="Avg. Duration"
-              value={avgDuration}
-              valueAlign="right"
-              format={(value) => humanizeDuration({ duration: { seconds: value } })}
-            />
-            <TooltipItem
-              label="Total Duration"
-              value={totalDuration}
-              valueAlign="right"
-              format={(value) => humanizeDuration({ duration: { seconds: value } })}
-            />
+            <Tooltip.Header>
+              {daysOfWeek[data[0]]} @ {data[1]}:00
+            </Tooltip.Header>
 
-            <TooltipSeparator />
-            <TooltipItem
-              label="Avg. Distance"
-              value={avgDistance}
-              valueAlign="right"
-              format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
-            />
-            <TooltipItem
-              label="Total Distance"
-              value={totalDistance}
-              valueAlign="right"
-              format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
-            />
+            <Tooltip.List>
+              <Tooltip.Item label="Count" value={count} valueAlign="right" />
 
-            <TooltipSeparator />
-            <TooltipItem
-              label="Avg. Elevation"
-              value={avgElevation}
-              valueAlign="right"
-              format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
-            />
-            <TooltipItem
-              label="Total Elevation"
-              value={totalElevation}
-              valueAlign="right"
-              format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
-            />
-          </Tooltip>
+              <Tooltip.Separator />
+              <Tooltip.Item
+                label="Avg. Duration"
+                value={avgDuration}
+                valueAlign="right"
+                format={(value) => humanizeDuration({ duration: { seconds: value } })}
+              />
+              <Tooltip.Item
+                label="Total Duration"
+                value={totalDuration}
+                valueAlign="right"
+                format={(value) => humanizeDuration({ duration: { seconds: value } })}
+              />
+
+              <Tooltip.Separator />
+              <Tooltip.Item
+                label="Avg. Distance"
+                value={avgDistance}
+                valueAlign="right"
+                format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
+              />
+              <Tooltip.Item
+                label="Total Distance"
+                value={totalDistance}
+                valueAlign="right"
+                format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
+              />
+
+              <Tooltip.Separator />
+              <Tooltip.Item
+                label="Avg. Elevation"
+                value={avgElevation}
+                valueAlign="right"
+                format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
+              />
+              <Tooltip.Item
+                label="Total Elevation"
+                value={totalElevation}
+                valueAlign="right"
+                format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
+              />
+            </Tooltip.List>
+          </Tooltip.Root>
         </Chart>
       </div>
 
@@ -194,7 +187,7 @@
           xDomain={range(7)}
           y={(d) => 0}
           yScale={scaleBand()}
-          r={(d) => d[1].count}
+          c={(d) => d[1].count}
           padding={{ left: 48, bottom: 36 }}
           tooltip={{ mode: 'band' }}
           let:xScale
@@ -237,7 +230,7 @@
             <Highlight area axis="y" />
           </Svg>
 
-          <Tooltip class="whitespace-nowrap" header={(d) => daysOfWeek[d[0]]} let:data>
+          <Tooltip.Root class="whitespace-nowrap" let:data>
             {@const [
               dayOfWeek,
               {
@@ -250,50 +243,53 @@
                 totalElevation
               }
             ] = data}
-            <TooltipItem label="Count" value={count} valueAlign="right" />
+            <Tooltip.Header>{daysOfWeek[data[0]]}</Tooltip.Header>
+            <Tooltip.List>
+              <Tooltip.Item label="Count" value={count} valueAlign="right" />
 
-            <TooltipSeparator />
-            <TooltipItem
-              label="Avg. Duration"
-              value={avgDuration}
-              valueAlign="right"
-              format={(value) => humanizeDuration({ duration: { seconds: value } })}
-            />
-            <TooltipItem
-              label="Total Duration"
-              value={totalDuration}
-              valueAlign="right"
-              format={(value) => humanizeDuration({ duration: { seconds: value } })}
-            />
+              <Tooltip.Separator />
+              <Tooltip.Item
+                label="Avg. Duration"
+                value={avgDuration}
+                valueAlign="right"
+                format={(value) => humanizeDuration({ duration: { seconds: value } })}
+              />
+              <Tooltip.Item
+                label="Total Duration"
+                value={totalDuration}
+                valueAlign="right"
+                format={(value) => humanizeDuration({ duration: { seconds: value } })}
+              />
 
-            <TooltipSeparator />
-            <TooltipItem
-              label="Avg. Distance"
-              value={avgDistance}
-              valueAlign="right"
-              format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
-            />
-            <TooltipItem
-              label="Total Distance"
-              value={totalDistance}
-              valueAlign="right"
-              format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
-            />
+              <Tooltip.Separator />
+              <Tooltip.Item
+                label="Avg. Distance"
+                value={avgDistance}
+                valueAlign="right"
+                format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
+              />
+              <Tooltip.Item
+                label="Total Distance"
+                value={totalDistance}
+                valueAlign="right"
+                format={(value) => format(metersToMiles(value), 'decimal') + ' mi'}
+              />
 
-            <TooltipSeparator />
-            <TooltipItem
-              label="Avg. Elevation"
-              value={avgElevation}
-              valueAlign="right"
-              format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
-            />
-            <TooltipItem
-              label="Total Elevation"
-              value={totalElevation}
-              valueAlign="right"
-              format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
-            />
-          </Tooltip>
+              <Tooltip.Separator />
+              <Tooltip.Item
+                label="Avg. Elevation"
+                value={avgElevation}
+                valueAlign="right"
+                format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
+              />
+              <Tooltip.Item
+                label="Total Elevation"
+                value={totalElevation}
+                valueAlign="right"
+                format={(value) => format(metersToFeet(value), 'integer') + ' ft'}
+              />
+            </Tooltip.List>
+          </Tooltip.Root>
         </Chart>
       </div>
     </Card>
