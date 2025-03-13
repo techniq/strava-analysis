@@ -62,11 +62,11 @@
         cScale={scaleThreshold().unknown('transparent')}
         cDomain={[1, 3, 6, 12]}
         cRange={[
-          'hsl(var(--color-secondary-100))',
-          'hsl(var(--color-secondary-300))',
-          'hsl(var(--color-secondary-500))',
-          'hsl(var(--color-secondary-700))',
-          'hsl(var(--color-secondary-900))'
+          'var(--color-secondary-100)',
+          'var(--color-secondary-300)',
+          'var(--color-secondary-500)',
+          'var(--color-secondary-700)',
+          'var(--color-secondary-900)'
         ]}
         padding={{ left: 40, top: 16 }}
         tooltip={{ mode: 'manual' }}

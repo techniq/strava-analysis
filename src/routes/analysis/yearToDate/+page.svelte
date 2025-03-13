@@ -54,7 +54,7 @@
             {@const color =
               tooltip.data == null || tooltip.data.start_date.getFullYear() === year
                 ? colorScale(year)
-                : 'hsl(var(--color-surface-content) / 20%)'}
+                : 'color-mix(in oklab, var(--color-surface-content) 20%, transparent)'}
             <Spline
               data={yearData.values}
               width={2}
