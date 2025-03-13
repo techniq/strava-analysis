@@ -19,6 +19,8 @@
 
   import NavMenu from './_NavMenu.svelte';
 
+  import './app.css';
+
   export let data;
 
   settings({
@@ -131,13 +133,3 @@
     <slot />
   </AppLayout>
 {/if}
-
-<style lang="postcss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-
-  :global(body) {
-    @apply bg-surface-200;
-  }
-</style>
