@@ -15,7 +15,7 @@
   />
 
   {#if $athlete}
-    <div class="flex-grow">
+    <div class="grow">
       <div>{$athlete.firstname} {$athlete.lastname}</div>
       <div class="text-xs text-surface-content/40">{$athlete.city}, {$athlete.state}</div>
     </div>
@@ -45,9 +45,3 @@
 <h2>Activities</h2>
 <NavItem text="Analysis" icon={mdiFinance} path="/analysis" currentUrl={$page.url} />
 <NavItem text="Browse" icon={mdiTimelineClockOutline} path="/activities" currentUrl={$page.url} />
-
-<style lang="postcss">
-  h2 {
-    @apply pt-4 pb-2 pl-4 text-xs text-surface-content font-bold;
-  }
-</style>
