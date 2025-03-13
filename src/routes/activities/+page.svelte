@@ -95,7 +95,7 @@
             format: (value) => format(metersToMiles(value), 'decimal') + ' mi',
             align: 'right',
             dataBackground: {
-              color: 'hsl(var(--color-secondary) / 10%)',
+              color: 'color-mix(in oklab, var(--color-secondary) 10%, transparent)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
@@ -106,7 +106,7 @@
             format: (value) => format(metersToFeet(value), 'integer') + ' ft',
             align: 'right',
             dataBackground: {
-              color: 'hsl(var(--color-secondary) / 10%)',
+              color: 'color-mix(in oklab, var(--color-secondary) 10%, transparent)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
@@ -115,7 +115,7 @@
             name: 'moving_time',
             header: 'Duration',
             dataBackground: {
-              color: 'hsl(var(--color-secondary) / 10%)',
+              color: 'color-mix(in oklab, var(--color-secondary) 10%, transparent)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
@@ -126,7 +126,7 @@
             value: (d) =>
               d.distance ? Math.round(d.moving_time / metersToMiles(d.distance)) : null,
             dataBackground: {
-              color: 'hsl(var(--color-secondary) / 10%)',
+              color: 'color-mix(in oklab, var(--color-secondary) 10%, transparent)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }
@@ -157,7 +157,7 @@
                   td: 'w-[100px]'
                 },
                 dataBackground: {
-                  color: 'hsl(var(--color-danger) / 10%)',
+                  color: 'color-mix(in oklab, var(--color-danger) 10%, transparent)',
                   inset: [1, 2],
                   tweened: { duration: 300 },
                   domain: [120, 160]
@@ -171,7 +171,7 @@
                   td: 'w-[100px]'
                 },
                 dataBackground: {
-                  color: 'hsl(var(--color-danger) / 10%)',
+                  color: 'color-mix(in oklab, var(--color-danger) 10%, transparent)',
                   inset: [1, 2],
                   tweened: { duration: 300 },
                   domain: [150, 180]
@@ -184,7 +184,7 @@
             header: 'Kudos',
             align: 'right',
             dataBackground: {
-              color: 'hsl(var(--color-primary) / 10%)',
+              color: 'color-mix(in oklab, var(--color-primary) 10%, transparent)',
               inset: [1, 2],
               tweened: { duration: 300 }
             }

@@ -1,6 +1,18 @@
 @import 'tailwindcss';
 
-@config '../../tailwind.config.cjs';
+@import 'tailwindcss';
+
+@import '@layerstack/tailwind/core.css';
+@import '@layerstack/tailwind/utils.css';
+@import '@layerstack/tailwind/themes/basic.css';
+
+@source '../../node_modules/svelte-ux/dist';
+@source '../../node_modules/layerchart/dist';
+
+:root {
+  --color-primary: var(--color-orange-500);
+  --color-secondary: var(--color-blue-500);
+}
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -16,7 +28,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: color-mix(in oklab, hsl(var(--color-surface-content) / 1) 20%, transparent);
+    border-color: color-mix(in oklab, var(--color-surface-content) 20%, transparent);
   }
 }
 

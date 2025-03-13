@@ -32,10 +32,10 @@
   },
   "type": "module",
   "dependencies": {
-    "@layerstack/svelte-stores": "^0.0.11",
-    "@layerstack/svelte-table": "^0.0.13",
-    "@layerstack/tailwind": "^0.0.12",
-    "@layerstack/utils": "^0.1.0",
+    "@layerstack/svelte-stores": "1.0.2-next.0",
+    "@layerstack/svelte-table": "1.0.1-next.0",
+    "@layerstack/tailwind": "2.0.0-next.2",
+    "@layerstack/utils": "1.1.0-next.0",
     "@mdi/js": "^7.4.47",
     "@types/d3-scale-chromatic": "^3.1.0",
     "d3-array": "^3.2.4",
@@ -43,8 +43,8 @@
     "d3-scale-chromatic": "^3.1.0",
     "d3-time": "^3.1.0",
     "date-fns": "^4.1.0",
-    "layerchart": "^0.97.1",
+    "layerchart": "2.0.0-next.0",
     "posthog-js": "^1.217.2",
-    "svelte-ux": "^0.90.1"
+    "svelte-ux": "2.0.0-next.1"
   }
 }
