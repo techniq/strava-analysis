@@ -4,7 +4,7 @@
   import { flatRollup, range, sum } from 'd3-array';
   import { schemeGreens } from 'd3-scale-chromatic';
 
-  import { Card } from 'svelte-ux';
+  import { Card, Lazy } from 'svelte-ux';
   import { Calendar, Chart, Group, Svg, Text, Tooltip } from 'layerchart';
   import { format, PeriodType, sortFunc } from '@layerstack/utils';
   import { promiseStore } from '@layerstack/svelte-stores';
@@ -46,67 +46,76 @@
   {#each activitiesBySportType as [type, data]}
     {@const lastActivity = data.values.at(-1)}
     {@const chartData = rollupActivites(data.values)}
-    <Card
-      title={type}
-      subheading="{data.values.length} activities • {format(
-        lastActivity.distance,
-        'decimal'
-      )} total miles"
-      class="overflow-hidden"
-      style="height: {years.length * 136 + 16 + 80}px"
-    >
-      <Chart
-        data={chartData}
-        x={(d) => d.date}
-        c={(d) => d.distance}
-        cScale={scaleThreshold().unknown('transparent')}
-        cDomain={[1, 3, 6, 12]}
-        cRange={[
-          'var(--color-secondary-100)',
-          'var(--color-secondary-300)',
-          'var(--color-secondary-500)',
-          'var(--color-secondary-700)',
-          'var(--color-secondary-900)'
-        ]}
-        padding={{ left: 40, top: 16 }}
+    {@const height = years.length * 136 + 16 + 80}
+    <Lazy {height}>
+      <Card
+        title={type}
+        subheading="{data.values.length} activities • {format(
+          lastActivity.distance,
+          'decimal'
+        )} total miles"
+        class="overflow-hidden"
+        style="height: {height}px"
       >
-        {#snippet children({ context })}
-          <Svg>
-            {#each years as year, i}
-              {@const start = new Date(year, 0, 1)}
-              {@const end = endOfYear(start)}
-              <Group y={136 * i}>
-                <Text
-                  value={year}
-                  class="text-xs"
-                  rotate={270}
-                  x={-20}
-                  y={(16 * 7) / 2}
-                  textAnchor="middle"
-                  verticalAnchor="start"
-                />
-                <Calendar {start} {end} tooltipContext={context.tooltip} cellSize={16} monthPath />
-              </Group>
-            {/each}
-          </Svg>
+        <Chart
+          data={chartData}
+          x={(d) => d.date}
+          c={(d) => d.distance}
+          cScale={scaleThreshold().unknown('transparent')}
+          cDomain={[1, 3, 6, 12]}
+          cRange={[
+            'var(--color-secondary-100)',
+            'var(--color-secondary-300)',
+            'var(--color-secondary-500)',
+            'var(--color-secondary-700)',
+            'var(--color-secondary-900)'
+          ]}
+          padding={{ left: 40, top: 16 }}
+        >
+          {#snippet children({ context })}
+            <Svg>
+              {#each years as year, i}
+                {@const start = new Date(year, 0, 1)}
+                {@const end = endOfYear(start)}
+                <Group y={136 * i}>
+                  <Text
+                    value={year}
+                    class="text-xs"
+                    rotate={270}
+                    x={-20}
+                    y={(16 * 7) / 2}
+                    textAnchor="middle"
+                    verticalAnchor="start"
+                  />
+                  <Calendar
+                    {start}
+                    {end}
+                    tooltipContext={context.tooltip}
+                    cellSize={16}
+                    monthPath
+                  />
+                </Group>
+              {/each}
+            </Svg>
 
-          <Tooltip.Root>
-            {@const data = context.tooltip.data}
-            {format(data.date, PeriodType.Day)}
+            <Tooltip.Root>
+              {@const data = context.tooltip.data}
+              {format(data.date, PeriodType.Day)}
 
-            {#if data.distance != null}
-              <Tooltip.List>
-                <Tooltip.Item
-                  label="miles"
-                  value={data.distance}
-                  format="decimal"
-                  valueAlign="right"
-                />
-              </Tooltip.List>
-            {/if}
-          </Tooltip.Root>
-        {/snippet}
-      </Chart>
-    </Card>
+              {#if data.distance != null}
+                <Tooltip.List>
+                  <Tooltip.Item
+                    label="miles"
+                    value={data.distance}
+                    format="decimal"
+                    valueAlign="right"
+                  />
+                </Tooltip.List>
+              {/if}
+            </Tooltip.Root>
+          {/snippet}
+        </Chart>
+      </Card>
+    </Lazy>
   {/each}
 </div>
