@@ -35,7 +35,6 @@
         xDomain={timeMonth.range(...startDateExtent)}
         y={(d) => metersToMiles(d.distance)}
         padding={{ left: 32, bottom: 24, right: 16 }}
-        tooltip={{ mode: 'voronoi' }}
         props={{
           xAxis: {
             grid: true,
@@ -49,18 +48,22 @@
             y: { style: 'stroke-dasharray: 2' }
           },
           bars: {
-            rounded: false,
+            rounded: 'none',
             class: 'fill-blue-500/10 stroke-none'
           },
           highlight: {
             area: false,
             lines: true,
             points: { class: 'fill-blue-500' }
+          },
+          tooltip: {
+            context: { mode: 'voronoi' }
           }
         }}
       >
-        <svelte:fragment slot="tooltip">
-          <Tooltip.Root x="data" y="data" let:data>
+        {#snippet tooltip({ context })}
+          {@const data = context.tooltip.data}
+          <Tooltip.Root x="data" y="data">
             <Tooltip.Header>{dateFormat(data.start_date, 'eee, MMMM do')}</Tooltip.Header>
             <Tooltip.List>
               <Tooltip.Item
@@ -77,7 +80,7 @@
               />
             </Tooltip.List>
           </Tooltip.Root>
-        </svelte:fragment>
+        {/snippet}
       </BarChart>
     </Card>
   {/each}

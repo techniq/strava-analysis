@@ -69,42 +69,43 @@
           'var(--color-secondary-900)'
         ]}
         padding={{ left: 40, top: 16 }}
-        tooltip={{ mode: 'manual' }}
-        let:tooltip
       >
-        <Svg>
-          {#each years as year, i}
-            {@const start = new Date(year, 0, 1)}
-            {@const end = endOfYear(start)}
-            <Group y={136 * i}>
-              <Text
-                value={year}
-                class="text-xs"
-                rotate={270}
-                x={-20}
-                y={(16 * 7) / 2}
-                textAnchor="middle"
-                verticalAnchor="start"
-              />
-              <Calendar {start} {end} {tooltip} cellSize={16} monthPath />
-            </Group>
-          {/each}
-        </Svg>
+        {#snippet children({ context })}
+          <Svg>
+            {#each years as year, i}
+              {@const start = new Date(year, 0, 1)}
+              {@const end = endOfYear(start)}
+              <Group y={136 * i}>
+                <Text
+                  value={year}
+                  class="text-xs"
+                  rotate={270}
+                  x={-20}
+                  y={(16 * 7) / 2}
+                  textAnchor="middle"
+                  verticalAnchor="start"
+                />
+                <Calendar {start} {end} tooltipContext={context.tooltip} cellSize={16} monthPath />
+              </Group>
+            {/each}
+          </Svg>
 
-        <Tooltip.Root let:data>
-          {format(data.date, PeriodType.Day)}
+          <Tooltip.Root>
+            {@const data = context.tooltip.data}
+            {format(data.date, PeriodType.Day)}
 
-          {#if data.distance != null}
-            <Tooltip.List>
-              <Tooltip.Item
-                label="miles"
-                value={data.distance}
-                format="decimal"
-                valueAlign="right"
-              />
-            </Tooltip.List>
-          {/if}
-        </Tooltip.Root>
+            {#if data.distance != null}
+              <Tooltip.List>
+                <Tooltip.Item
+                  label="miles"
+                  value={data.distance}
+                  format="decimal"
+                  valueAlign="right"
+                />
+              </Tooltip.List>
+            {/if}
+          </Tooltip.Root>
+        {/snippet}
       </Chart>
     </Card>
   {/each}

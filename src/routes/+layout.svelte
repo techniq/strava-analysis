@@ -91,9 +91,9 @@
   </ViewportCenter>
 {:else}
   <AppLayout>
-    <svelte:fragment slot="nav">
+    {#snippet nav()}
       <NavMenu />
-    </svelte:fragment>
+    {/snippet}
 
     <AppBar title="Strava Analysis">
       <div slot="actions" class="flex gap-3 items-center">

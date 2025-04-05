@@ -40,60 +40,64 @@
         yNice
         padding={{ left: 32, bottom: 24, right: 32 }}
         tooltip={{ mode: 'voronoi' }}
-        let:tooltip
       >
-        <Svg>
-          <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
-          <Axis
-            placement="bottom"
-            rule
-            ticks={range(0, 12).map((m) => getDayOfYear(new Date(2024, m, 1)))}
-            format={(v) => format(new Date(2024, 0, v), PeriodType.Month)}
-          />
-          {#each data.valuesByYear.sort(sortFunc((d) => d[0])) as [year, yearData], i}
-            {@const color =
-              tooltip.data == null || tooltip.data.start_date.getFullYear() === year
-                ? colorScale(year)
-                : 'color-mix(in oklab, var(--color-surface-content) 20%, transparent)'}
-            <Spline
-              data={yearData.values}
-              width={2}
-              stroke={color}
-              draw={{ duration: 8000, easing: linear }}
-            >
-              <svelte:fragment slot="end">
-                <circle r={3} fill={color} />
-                <Text
-                  verticalAnchor="middle"
-                  value={year}
-                  dx={4}
-                  dy={-2}
-                  class="text-xs stroke-surface-100 stroke-2"
-                  style="fill:{color}"
-                />
-              </svelte:fragment>
-            </Spline>
-          {/each}
-          <Highlight points={{ class: 'fill-black' }} lines />
-        </Svg>
+        {#snippet children({ context })}
+          <Svg>
+            <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
+            <Axis
+              placement="bottom"
+              rule
+              ticks={range(0, 12).map((m) => getDayOfYear(new Date(2024, m, 1)))}
+              format={(v) => format(new Date(2024, 0, v), PeriodType.Month)}
+            />
+            {#each data.valuesByYear.sort(sortFunc((d) => d[0])) as [year, yearData], i}
+              {@const color =
+                context.tooltip.data == null ||
+                context.tooltip.data.start_date.getFullYear() === year
+                  ? colorScale(year)
+                  : 'color-mix(in oklab, var(--color-surface-content) 20%, transparent)'}
+              <Spline
+                data={yearData.values}
+                width={2}
+                stroke={color}
+                draw={{ duration: 8000, easing: linear }}
+              >
+                {#snippet endContent()}
+                  <circle r={3} fill={color} />
+                  <Text
+                    verticalAnchor="middle"
+                    value={year}
+                    dx={4}
+                    dy={-2}
+                    class="text-xs stroke-surface-100 stroke-2"
+                    style="fill:{color}"
+                  />
+                {/snippet}
+              </Spline>
+            {/each}
+            <Highlight lines />
+          </Svg>
 
-        <Tooltip.Root x="data" y="data" let:data>
-          <Tooltip.Header>{format(data.start_date, PeriodType.Day)}</Tooltip.Header>
-          <Tooltip.List>
-            <Tooltip.Item
-              label="Distance"
-              value={metersToMiles(data.distance)}
-              format="decimal"
-              valueAlign="right"
-            />
-            <Tooltip.Item
-              label="Total Distance"
-              value={metersToMiles(data.totalDistance)}
-              format="decimal"
-              valueAlign="right"
-            />
-          </Tooltip.List>
-        </Tooltip.Root>
+          <Tooltip.Root x="data" y="data" xOffset={8}>
+            <Tooltip.Header
+              >{format(context.tooltip.data.start_date, PeriodType.Day)}</Tooltip.Header
+            >
+            <Tooltip.List>
+              <Tooltip.Item
+                label="Distance"
+                value={metersToMiles(context.tooltip.data.distance)}
+                format="decimal"
+                valueAlign="right"
+              />
+              <Tooltip.Item
+                label="Total Distance"
+                value={metersToMiles(context.tooltip.data.totalDistance)}
+                format="decimal"
+                valueAlign="right"
+              />
+            </Tooltip.List>
+          </Tooltip.Root>
+        {/snippet}
       </Chart>
     </Card>
   {/each}
