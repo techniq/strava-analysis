@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { scaleBand, scaleTime } from 'd3-scale';
   import { format } from 'date-fns';
 
   import { Card } from 'svelte-ux';
-  import { Area, Axis, Chart, Highlight, LinearGradient, Svg, Tooltip } from 'layerchart';
+  import { Area, LinearGradient, LineChart, Tooltip } from 'layerchart';
   import { promiseStore } from '@layerstack/svelte-stores';
   import { metersToMiles } from '$lib/utils.js';
+  import { PeriodType } from '@layerstack/utils';
 
   export let data;
 
@@ -19,30 +19,37 @@
 <div class="grid gap-4 p-4">
   {#each activitiesBySportType as [type, data]}
     <Card title={type} class="h-[300px]">
-      <Chart
+      <LineChart
         data={data.values}
         x="start_date"
-        xScale={scaleTime()}
-        _xScale={scaleBand().padding(0.4)}
         xDomain={startDateExtent}
         y={(d) => metersToMiles(d.totalDistance)}
-        yDomain={[0, null]}
-        yNice
         padding={{ left: 32, bottom: 24, right: 16 }}
-        tooltip={{ mode: 'bisect-x' }}
+        props={{
+          xAxis: {
+            format: PeriodType.CalendarYear,
+            grid: { style: 'stroke-dasharray: 2' }
+          },
+          yAxis: {
+            format: 'metric'
+          },
+          highlight: {
+            points: {
+              class: 'fill-blue-500'
+            }
+          }
+        }}
       >
-        {#snippet children({ context })}
-          <Svg>
-            <Axis placement="left" grid={{ style: 'stroke-dasharray: 2' }} rule format="metric" />
-            <Axis placement="bottom" grid rule />
-            <LinearGradient class="from-blue-500/50 to-blue-500/1" vertical>
-              {#snippet children({ gradient })}
-                <Area line={{ class: 'stroke-blue-500 stroke-2' }} fill={gradient} />
-              {/snippet}
-            </LinearGradient>
-            <Highlight points={{ class: 'fill-blue-500' }} lines />
-          </Svg>
-          <Tooltip.Root x="data" y="data">
+        {#snippet marks()}
+          <LinearGradient class="from-blue-500/50 to-blue-500/1" vertical>
+            {#snippet children({ gradient })}
+              <Area line={{ class: 'stroke-blue-500 stroke-2' }} fill={gradient} />
+            {/snippet}
+          </LinearGradient>
+        {/snippet}
+
+        {#snippet tooltip({ context })}
+          <Tooltip.Root x="data" y="data" xOffset={8} yOffset={8}>
             {@const data = context.tooltip.data}
             <Tooltip.Header>{format(data.start_date, 'eee, MMMM do')}</Tooltip.Header>
             <Tooltip.List>
@@ -61,7 +68,7 @@
             </Tooltip.List>
           </Tooltip.Root>
         {/snippet}
-      </Chart>
+      </LineChart>
     </Card>
   {/each}
 </div>
