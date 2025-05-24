@@ -83,7 +83,7 @@
   <ViewportCenter>
     <Card title="Authenticate" subheading="Login to retrieve access token for Strava API">
       <div class="px-4 pb-4">
-        <Button href="/auth/login" rel="external" variant="fill" color="blue" icon={mdiLogin}>
+        <Button href="/auth/login" rel="external" variant="fill" color="primary" icon={mdiLogin}>
           Login
         </Button>
       </div>

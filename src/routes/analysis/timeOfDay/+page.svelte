@@ -5,7 +5,7 @@
 
   import { Card } from 'svelte-ux';
   import { Axis, Chart, Circle, Highlight, Points, Svg, Text, Tooltip } from 'layerchart';
-  import { format, humanizeDuration } from '@layerstack/utils';
+  import { format, Duration } from '@layerstack/utils';
   import { promiseStore } from '@layerstack/svelte-stores';
   import { metersToFeet, metersToMiles } from '$lib/utils.js';
 
@@ -140,13 +140,13 @@
                   label="Avg. Duration"
                   value={avgDuration}
                   valueAlign="right"
-                  format={(value) => humanizeDuration({ duration: { seconds: value } })}
+                  format={(value) => new Duration({ duration: { seconds: value } }).format()}
                 />
                 <Tooltip.Item
                   label="Total Duration"
                   value={totalDuration}
                   valueAlign="right"
-                  format={(value) => humanizeDuration({ duration: { seconds: value } })}
+                  format={(value) => new Duration({ duration: { seconds: value } }).format()}
                 />
 
                 <Tooltip.Separator />
@@ -207,7 +207,6 @@
                 grid={{ style: 'stroke-dasharray: 2' }}
                 rule
               />
-              <Axis placement="left" format={(d) => ''} tickSize={0} />
               <Points>
                 {#snippet children({ points })}
                   {#each points as point, index}
@@ -231,7 +230,6 @@
                 {/snippet}
               </Points>
               <Highlight area axis="x" />
-              <Highlight area axis="y" />
             </Svg>
 
             <Tooltip.Root class="whitespace-nowrap">
@@ -257,13 +255,13 @@
                   label="Avg. Duration"
                   value={avgDuration}
                   valueAlign="right"
-                  format={(value) => humanizeDuration({ duration: { seconds: value } })}
+                  format={(value) => new Duration({ duration: { seconds: value } }).format()}
                 />
                 <Tooltip.Item
                   label="Total Duration"
                   value={totalDuration}
                   valueAlign="right"
-                  format={(value) => humanizeDuration({ duration: { seconds: value } })}
+                  format={(value) => new Duration({ duration: { seconds: value } }).format()}
                 />
 
                 <Tooltip.Separator />

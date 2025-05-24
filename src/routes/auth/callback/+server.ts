@@ -17,7 +17,7 @@ export async function GET({ url, locals, cookies }) {
     path: '/',
     httpOnly: true,
     secure: BASE_URL.startsWith('https://')
-  } as CookieSerializeOptions;
+  } satisfies CookieSerializeOptions;
 
   cookies.set('athlete', athlete.id || '', cookieOptions);
   cookies.set('accessToken', access_token || '', cookieOptions);
