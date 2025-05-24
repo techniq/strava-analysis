@@ -7,13 +7,15 @@
   import { metersToMiles } from '$lib/utils.js';
   import { PeriodType } from '@layerstack/utils';
 
-  export let data;
+  let { data } = $props();
 
   const streamed = promiseStore(data.streamed.activities);
-  $: streamed.setPromise(data.streamed.activities);
+  $effect(() => {
+    streamed.setPromise(data.streamed.activities);
+  });
 
-  $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
-  $: startDateExtent = $streamed.data?.startDateExtent ?? [];
+  let activitiesBySportType = $derived($streamed.data?.activitiesBySportType ?? []);
+  let startDateExtent = $derived($streamed.data?.startDateExtent ?? []);
 </script>
 
 <div class="grid gap-4 p-4">

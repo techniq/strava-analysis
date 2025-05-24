@@ -11,17 +11,18 @@
     settings,
     ThemeSelect
   } from 'svelte-ux';
-  import { mdiGithub, mdiLogin, mdiTwitter } from '@mdi/js';
+  import { mdiGithub, mdiLogin } from '@mdi/js';
+  import { watch } from 'runed';
 
-  import { athlete } from '$lib/stores';
+  import { appState } from '$lib/state.svelte';
   import { dev } from '$app/environment';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 
   import NavMenu from './_NavMenu.svelte';
 
   import './app.css';
 
-  export let data;
+  let { data, children } = $props();
 
   settings({
     components: {
@@ -50,29 +51,30 @@
     }
   });
 
-  $athlete = data.athlete;
+  appState.athlete = data.athlete;
 
   let currentPath = '';
   onMount(() => {
     // Posthog analytics
     if (!dev) {
-      const unsubscribePage = page.subscribe(($page) => {
-        if (currentPath && currentPath !== $page.url.pathname) {
-          // Page navigated away
-          posthog.capture('$pageleave');
+      watch(
+        () => page,
+        () => {
+          if (currentPath && currentPath !== page.url.pathname) {
+            // Page navigated away
+            posthog.capture('$pageleave');
+          }
+          // Page entered
+          currentPath = page.url.pathname;
+          posthog.capture('$pageview');
         }
-
-        // Page entered
-        currentPath = $page.url.pathname;
-        posthog.capture('$pageview');
-      });
+      );
       const handleBeforeUnload = () => {
         // Hard reloads or browser exit
         posthog.capture('$pageleave');
       };
       window.addEventListener('beforeunload', handleBeforeUnload);
       return () => {
-        unsubscribePage();
         window.removeEventListener('beforeunload', handleBeforeUnload);
       };
     }
@@ -130,6 +132,6 @@
       </div>
     </AppBar>
 
-    <slot />
+    {@render children?.()}
   </AppLayout>
 {/if}

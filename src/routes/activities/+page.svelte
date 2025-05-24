@@ -9,9 +9,9 @@
   import { goto } from '$app/navigation';
   import { metersToFeet, metersToMiles } from '$lib/utils.js';
 
-  export let data;
+  let { data } = $props();
 
-  let athleteId = data.params.athleteId;
+  let athleteId = $derived(data.params.athleteId);
 
   const pagination = paginationStore({
     total:
@@ -33,8 +33,10 @@
   const paginationChange = changeStore(pagination, run);
   $paginationChange; // must subscribe to fire change events
 
-  const streamed = promiseStore(data.streamed.activities);
-  $: streamed.setPromise(data.streamed.activities);
+  const streamed = promiseStore(data.streamed.activities as Promise<any[]>);
+  $effect(() => {
+    streamed.setPromise(data.streamed.activities);
+  });
 </script>
 
 <main>
@@ -205,7 +207,7 @@
                 {#if column.name === 'moving_time' || column.name === 'elapsed_time' || column.name === 'pace'}
                   <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
                     {#if value}
-                      <Duration duration={{ seconds: value }} />
+                      <Duration duration={{ seconds: value } as any} />
                     {/if}
                   </td>
                 {:else if column.name === 'sport_type'}

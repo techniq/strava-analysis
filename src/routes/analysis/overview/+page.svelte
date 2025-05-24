@@ -9,12 +9,15 @@
 
   import { metersToMiles } from '$lib/utils.js';
 
-  export let data;
-  const streamed = promiseStore(data.streamed.activities);
-  $: streamed.setPromise(data.streamed.activities);
+  let { data } = $props();
 
-  $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
-  $: startDateExtent = $streamed.data?.startDateExtent ?? [];
+  const streamed = promiseStore(data.streamed.activities);
+  $effect(() => {
+    streamed.setPromise(data.streamed.activities);
+  });
+
+  let activitiesBySportType = $derived($streamed.data?.activitiesBySportType ?? []);
+  let startDateExtent = $derived<Date[]>($streamed.data?.startDateExtent ?? []);
 </script>
 
 <div class="grid gap-4 p-4">
@@ -32,13 +35,13 @@
         data={data.values}
         x={(d) => timeMonth(d.start_date)}
         bandPadding={0.1}
-        xDomain={timeMonth.range(...startDateExtent)}
+        xDomain={timeMonth.range(startDateExtent[0], startDateExtent[1])}
         y={(d) => metersToMiles(d.distance)}
         padding={{ left: 32, bottom: 24, right: 16 }}
         props={{
           xAxis: {
             grid: true,
-            ticks: timeYear.range(...startDateExtent),
+            ticks: timeYear.range(startDateExtent[0], startDateExtent[1]),
             format: PeriodType.CalendarYear
           },
           yAxis: {

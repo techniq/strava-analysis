@@ -8,12 +8,15 @@
 
   import { metersToMiles } from '$lib/utils.js';
 
-  export let data;
-  const streamed = promiseStore(data.streamed.activities);
-  $: streamed.setPromise(data.streamed.activities);
+  let { data } = $props();
 
-  $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
-  $: startDateExtent = $streamed.data?.startDateExtent ?? [];
+  const streamed = promiseStore(data.streamed.activities);
+  $effect(() => {
+    streamed.setPromise(data.streamed.activities);
+  });
+
+  let activitiesBySportType = $derived($streamed.data?.activitiesBySportType ?? []);
+  let startDateExtent = $derived($streamed.data?.startDateExtent ?? []);
 </script>
 
 <div class="grid gap-4 p-4">

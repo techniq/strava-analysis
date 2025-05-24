@@ -11,20 +11,26 @@
   import { promiseStore } from '@layerstack/svelte-stores';
   import { metersToMiles } from '$lib/utils.js';
 
-  export let data;
+  let { data } = $props();
   const streamed = promiseStore(data.streamed.activities);
-  $: streamed.setPromise(data.streamed.activities);
+  $effect(() => {
+    streamed.setPromise(data.streamed.activities);
+  });
 
-  $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
+  let activitiesBySportType = $derived($streamed.data?.activitiesBySportType ?? []);
 
-  $: yearsDomain = extent(
-    activitiesBySportType
-      .flatMap(([type, sportData]) => sportData)
-      .flatMap((d) => d.valuesByYear)
-      .flatMap((d) => d[0])
+  let yearsDomain = $derived(
+    extent(
+      activitiesBySportType
+        .flatMap(([type, sportData]) => sportData)
+        .flatMap((d) => d.valuesByYear)
+        .flatMap((d) => d[0])
+    )
   );
   // Remove year to skip black color
-  $: colorScale = scaleSequential(interpolateTurbo).domain([yearsDomain[0] - 1, yearsDomain[1]]);
+  let colorScale = $derived(
+    scaleSequential(interpolateTurbo).domain([yearsDomain[0] - 1, yearsDomain[1]])
+  );
 </script>
 
 <div class="grid gap-4 p-4">

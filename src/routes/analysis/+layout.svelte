@@ -2,16 +2,16 @@
   import { Card, ProgressCircle, ToggleGroup, ToggleOption } from 'svelte-ux';
   import { format } from '@layerstack/utils';
 
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { goto } from '$app/navigation';
 
-  export let data;
+  let { data, children } = $props();
 </script>
 
 <main>
   <div class="bg-surface-100">
     <ToggleGroup
-      value={$page.route.id}
+      value={page.route.id}
       variant="underline"
       classes={{
         root: 'overflow-auto scrollbar-none',
@@ -40,6 +40,6 @@
       </div>
     </Card>
   {:then data}
-    <slot />
+    {@render children?.()}
   {/await}
 </main>

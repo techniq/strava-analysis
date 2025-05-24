@@ -27,6 +27,7 @@ export async function load({ locals, setHeaders }) {
         strava.api('/athlete/activities', { data: { page: x + 1, per_page } })
       )
     );
+    // @ts-expect-error
     const activities = await activitiesResults.flatMap((r) => r.value).sort(sortFunc('start_date'));
 
     const startDateExtent = extent(activities, (d) => d.start_date);

@@ -9,49 +9,53 @@
   import { promiseStore } from '@layerstack/svelte-stores';
   import { metersToFeet, metersToMiles } from '$lib/utils.js';
 
-  export let data;
+  let { data } = $props();
   const streamed = promiseStore(data.streamed.activities);
-  $: streamed.setPromise(data.streamed.activities);
-
-  $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
-
-  $: chartDataByType = activitiesBySportType.map((d) => {
-    const [sportType, { values }] = d;
-
-    const valuesByDayOfWeek = flatRollup(
-      values,
-      (items) => {
-        return {
-          count: items.length,
-          avgDuration: Math.round(mean(items, (d) => d.moving_time)),
-          totalDuration: Math.round(sum(items, (d) => d.moving_time)),
-          avgDistance: mean(items, (d) => d.distance),
-          totalDistance: sum(items, (d) => d.distance),
-          avgElevation: mean(items, (d) => d.total_elevation_gain),
-          totalElevation: sum(items, (d) => d.total_elevation_gain)
-        };
-      },
-      (d) => getDay(d.start_date)
-    );
-
-    const valuesByDayOfWeekAndHours = flatRollup(
-      values,
-      (items) => {
-        return {
-          count: items.length,
-          avgDuration: Math.round(mean(items, (d) => d.moving_time)),
-          totalDuration: Math.round(sum(items, (d) => d.moving_time)),
-          avgDistance: mean(items, (d) => d.distance),
-          totalDistance: sum(items, (d) => d.distance),
-          avgElevation: mean(items, (d) => d.total_elevation_gain),
-          totalElevation: sum(items, (d) => d.total_elevation_gain)
-        };
-      },
-      (d) => getDay(d.start_date),
-      (d) => getHours(d.start_date)
-    );
-    return [sportType, valuesByDayOfWeek, valuesByDayOfWeekAndHours];
+  $effect(() => {
+    streamed.setPromise(data.streamed.activities);
   });
+
+  let activitiesBySportType = $derived($streamed.data?.activitiesBySportType ?? []);
+
+  let chartDataByType = $derived(
+    activitiesBySportType.map((d) => {
+      const [sportType, { values }] = d;
+
+      const valuesByDayOfWeek = flatRollup(
+        values,
+        (items) => {
+          return {
+            count: items.length,
+            avgDuration: Math.round(mean(items, (d) => d.moving_time)),
+            totalDuration: Math.round(sum(items, (d) => d.moving_time)),
+            avgDistance: mean(items, (d) => d.distance),
+            totalDistance: sum(items, (d) => d.distance),
+            avgElevation: mean(items, (d) => d.total_elevation_gain),
+            totalElevation: sum(items, (d) => d.total_elevation_gain)
+          };
+        },
+        (d) => getDay(d.start_date)
+      );
+
+      const valuesByDayOfWeekAndHours = flatRollup(
+        values,
+        (items) => {
+          return {
+            count: items.length,
+            avgDuration: Math.round(mean(items, (d) => d.moving_time)),
+            totalDuration: Math.round(sum(items, (d) => d.moving_time)),
+            avgDistance: mean(items, (d) => d.distance),
+            totalDistance: sum(items, (d) => d.distance),
+            avgElevation: mean(items, (d) => d.total_elevation_gain),
+            totalElevation: sum(items, (d) => d.total_elevation_gain)
+          };
+        },
+        (d) => getDay(d.start_date),
+        (d) => getHours(d.start_date)
+      );
+      return [sportType, valuesByDayOfWeek, valuesByDayOfWeekAndHours];
+    })
+  );
 
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 </script>
@@ -74,7 +78,7 @@
         >
           {#snippet children({ context })}
             {@const minBandwidth = Math.min(context.xScale.bandwidth(), context.yScale.bandwidth())}
-            {@const maxValue = max(valuesByDayOfWeekAndHours, (d) => d[2].count)}
+            {@const maxValue = max(valuesByDayOfWeekAndHours, (d) => d[2].count as number)}
             {@const rScale = scaleSqrt()
               .domain([0, maxValue])
               .range([0, minBandwidth / 2 - 5])}
@@ -196,7 +200,7 @@
         >
           {#snippet children({ context })}
             {@const minBandwidth = Math.min(context.xScale.bandwidth(), context.yScale.bandwidth())}
-            {@const maxValue = max(valuesByDayOfWeek, (d) => d[1].count)}
+            {@const maxValue = max(valuesByDayOfWeek, (d) => d[1].count as number)}
             {@const rScale = scaleSqrt()
               .domain([0, maxValue])
               .range([0, minBandwidth / 2 - 5])}

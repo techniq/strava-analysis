@@ -3,21 +3,23 @@
 
   import { Button, Dialog, NavItem, Toggle, Tooltip } from 'svelte-ux';
 
-  import { athlete } from '$lib/stores';
-  import { page } from '$app/stores';
+  import { appState } from '$lib/state.svelte';
+  import { page } from '$app/state';
 </script>
 
-<NavItem path="" currentUrl={$page.url} class="pl-4 border-b">
+<NavItem path="" currentUrl={page.url} class="pl-4 border-b">
   <img
-    src={$athlete.profile}
+    src={appState.athlete.profile}
     class="w-10 h-10 rounded-full mr-4 border border-surface-300"
     alt="profile"
   />
 
-  {#if $athlete}
+  {#if appState.athlete}
     <div class="grow">
-      <div>{$athlete.firstname} {$athlete.lastname}</div>
-      <div class="text-xs text-surface-content/40">{$athlete.city}, {$athlete.state}</div>
+      <div>{appState.athlete.firstname} {appState.athlete.lastname}</div>
+      <div class="text-xs text-surface-content/40">
+        {appState.athlete.city}, {appState.athlete.state}
+      </div>
     </div>
   {/if}
 
@@ -40,8 +42,8 @@
   </Toggle>
 </NavItem>
 
-<!-- <NavItem text="Home" icon={mdiHome} path="/" currentUrl={$page.url} class="mt-2" /> -->
+<!-- <NavItem text="Home" icon={mdiHome} path="/" currentUrl={page.url} class="mt-2" /> -->
 
 <h2>Activities</h2>
-<NavItem text="Analysis" icon={mdiFinance} path="/analysis" currentUrl={$page.url} />
-<NavItem text="Browse" icon={mdiTimelineClockOutline} path="/activities" currentUrl={$page.url} />
+<NavItem text="Analysis" icon={mdiFinance} path="/analysis" currentUrl={page.url} />
+<NavItem text="Browse" icon={mdiTimelineClockOutline} path="/activities" currentUrl={page.url} />

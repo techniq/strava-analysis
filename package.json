@@ -32,6 +32,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@layerstack/svelte-state": "0.1.0-next.8",
     "@layerstack/svelte-stores": "1.0.2-next.3",
     "@layerstack/svelte-table": "1.0.1-next.3",
     "@layerstack/tailwind": "2.0.0-next.5",
@@ -45,6 +46,7 @@
     "date-fns": "^4.1.0",
     "layerchart": "2.0.0-next.10",
     "posthog-js": "^1.246.0",
+    "runed": "^0.28.0",
     "svelte-ux": "2.0.0-next.5"
   }
 }

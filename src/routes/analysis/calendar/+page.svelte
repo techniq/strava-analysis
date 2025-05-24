@@ -11,15 +11,19 @@
 
   import { metersToMiles } from '$lib/utils.js';
 
-  export let data;
+  let { data } = $props();
   const streamed = promiseStore(data.streamed.activities);
-  $: streamed.setPromise(data.streamed.activities);
+  $effect(() => {
+    streamed.setPromise(data.streamed.activities);
+  });
 
-  $: activitiesBySportType = $streamed.data?.activitiesBySportType ?? [];
-  $: startDateExtent = $streamed.data?.startDateExtent ?? [];
+  let activitiesBySportType = $derived($streamed.data?.activitiesBySportType ?? []);
+  let startDateExtent = $derived($streamed.data?.startDateExtent ?? []);
 
-  $: years = range(startDateExtent[0]?.getFullYear(), startDateExtent[1]?.getFullYear() + 1).sort(
-    sortFunc((d) => d, 'desc')
+  let years = $derived(
+    range(startDateExtent[0]?.getFullYear(), startDateExtent[1]?.getFullYear() + 1).sort(
+      sortFunc((d) => d, 'desc')
+    )
   );
 
   // Rollup by day
