@@ -45,8 +45,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       layerchart:
-        specifier: 2.0.0-next.10
-        version: 2.0.0-next.10(svelte@5.33.1)
+        specifier: 2.0.0-next.11
+        version: 2.0.0-next.11(svelte@5.33.1)
       posthog-js:
         specifier: ^1.246.0
         version: 1.246.0
@@ -1288,8 +1288,8 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  layerchart@2.0.0-next.10:
-    resolution: {integrity: sha512-Jw0EMWRDjecl0esHlHeyqObhPJCOXD9eQLWOu3I37+XCHXDHp4QL/5avcmBIwflmLE1e/fVGoMaeTZjyezZGhA==}
+  layerchart@2.0.0-next.11:
+    resolution: {integrity: sha512-i0vO8R3CU1cann44I4mypEgHDiEpmxfiN+5VNzEiDaDsydOz5V8yO944U4izHO6eKEVjxv6qXS7+X4aTa+xxhQ==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -2831,7 +2831,7 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  layerchart@2.0.0-next.10(svelte@5.33.1):
+  layerchart@2.0.0-next.11(svelte@5.33.1):
     dependencies:
       '@dagrejs/dagre': 1.1.4
       '@layerstack/svelte-actions': 1.0.1-next.2
