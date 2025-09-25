@@ -50,7 +50,7 @@
           <Highlight points={{ class: 'fill-blue-500' }} lines />
         </Svg>
 
-        <Tooltip.Root x="data" y="data">
+        <Tooltip.Root x="data" y="data" xOffset={8} yOffset={8}>
           {#snippet children({ data })}
             <Tooltip.Header>{format(data.start_date, 'eee, MMMM do')}</Tooltip.Header>
             <Tooltip.List>

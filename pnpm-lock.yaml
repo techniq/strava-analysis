@@ -45,8 +45,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       layerchart:
-        specifier: 2.0.0-next.11
-        version: 2.0.0-next.11(svelte@5.33.1)
+        specifier: 2.0.0-next.39
+        version: 2.0.0-next.39(svelte@5.33.1)
       posthog-js:
         specifier: ^1.246.0
         version: 1.246.0
@@ -156,8 +156,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@dagrejs/dagre@1.1.4':
-    resolution: {integrity: sha512-QUTc54Cg/wvmlEUxB+uvoPVKFazM1H18kVHBQNmK2NbrDR5ihOCR6CXLnDSZzMcSQKJtabPUWridBOlJM3WkDg==}
+  '@dagrejs/dagre@1.1.5':
+    resolution: {integrity: sha512-Ghgrh08s12DCL5SeiR6AoyE80mQELTWhJBRmXfFoqDiFkR458vPEdgTbbjA0T+9ETNxUblnD0QW55tfdvi5pjQ==}
 
   '@dagrejs/graphlib@2.2.4':
     resolution: {integrity: sha512-mepCf/e9+SKYy1d02/UkvSy6+6MoyXhVxP8lLDfA7BPE1X1d4dR0sZznmbM8/XVJ1GPM+Svnx7Xj6ZweByWUkw==}
@@ -605,14 +605,14 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@layerstack/svelte-actions@1.0.1-next.2':
-    resolution: {integrity: sha512-s4iGrFIt+obdHP+Mzre+drCiZttqs5UYSw6CfQs1D2IeqTFkkbvRvYosh47flMi6ElN4psCrCcwn8KntClhMow==}
+  '@layerstack/svelte-actions@1.0.1-next.14':
+    resolution: {integrity: sha512-MPBmVaB+GfNHvBkg5nJkPG18smoXKvsvJRpsdWnrUBfca+TieZLoaEzNxDH+9LG11dIXP9gghsXt1mUqbbyAsA==}
 
   '@layerstack/svelte-actions@1.0.1-next.3':
     resolution: {integrity: sha512-A4mLdaitIZ5u0PfVyK8W+0zcuPWYgEhWX30t4IcUFOynE9u7tzaTrQoIwfZOYGFm2ok11F3DtdD2tXrqZEBgLQ==}
 
-  '@layerstack/svelte-state@0.1.0-next.7':
-    resolution: {integrity: sha512-9JQ5EyN/ghcSBKXjv1ueiM0TlsJv4eEWgW8mvd4dqxMLUzs+/fPJlXlxqBqvH/T64yauxvFUfytCGPnx1lRJsA==}
+  '@layerstack/svelte-state@0.1.0-next.19':
+    resolution: {integrity: sha512-yCYoQAIbeP8y1xmOB/r0+UundgP4JFnpNURgMki+26TotzoqrZ5oLpHvhPSVm60ks+buR3ebDBTeUFdHzxwzQQ==}
 
   '@layerstack/svelte-state@0.1.0-next.8':
     resolution: {integrity: sha512-in0Zxle55ajCbM6/5PNePPGiwnLI7mbGs695rkVgbwAxAdDDA/VApouf4J4PfgXCGp3sg8X6zlXIm88bMjGGdA==}
@@ -623,14 +623,14 @@ packages:
   '@layerstack/svelte-table@1.0.1-next.3':
     resolution: {integrity: sha512-X6Mgygd9jkuE3x0774K2UXKFehT5nKyUymIAyYY1045jIjL+sMQInmxyiIZZwQ8V3yAnG+4h5/yHuZRFI9uThA==}
 
-  '@layerstack/tailwind@2.0.0-next.4':
-    resolution: {integrity: sha512-46QUWvMaYGlGmi17vfT2o6mV7/0ZaWi0qJ4vjPKrayBsxn1mVjqX0cbW7EXC6JnmMVYt5CZu0768rWCM4nGCzA==}
+  '@layerstack/tailwind@2.0.0-next.17':
+    resolution: {integrity: sha512-ZSn6ouqpnzB6DKzSKLVwrUBOQsrzpDA/By2/ba9ApxgTGnaD1nyqNwrvmZ+kswdAwB4YnrGEAE4VZkKrB2+DaQ==}
 
   '@layerstack/tailwind@2.0.0-next.5':
     resolution: {integrity: sha512-su6Wywcp+pjLNwmqZWWcUc5kc624nfbXRX8UjpU6q8vEPnHShDLPZysQoZVWouo6A9fWTKTpr2mcmPj0IbN/EQ==}
 
-  '@layerstack/utils@1.1.0-next.2':
-    resolution: {integrity: sha512-9Y4TOAE0iIVvnrf1mkft79rF/vTO84bZuc4hjhJB7XguFjy2f00pEfrDjF+IqleWImMFfRu31K2IMM6wRWEBXQ==}
+  '@layerstack/utils@2.0.0-next.14':
+    resolution: {integrity: sha512-1I2CS0Cwgs53W35qVg1eBdYhB/CiPvL3s0XE61b8jWkTHxgjBF65yYNgXjW74kv7WI7GsJcWMNBufPd0rnu9kA==}
 
   '@layerstack/utils@2.0.0-next.3':
     resolution: {integrity: sha512-sTOF9cdh5lb9bqWW10kWwo4toSTjGOH4RNTr++59obVvdGp/hXo6LAN2WsdzkK9QFqBgEpuJH0rZ+D77lMSdeQ==}
@@ -1288,8 +1288,8 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  layerchart@2.0.0-next.11:
-    resolution: {integrity: sha512-i0vO8R3CU1cann44I4mypEgHDiEpmxfiN+5VNzEiDaDsydOz5V8yO944U4izHO6eKEVjxv6qXS7+X4aTa+xxhQ==}
+  layerchart@2.0.0-next.39:
+    resolution: {integrity: sha512-IS2OQnNFAhkcKL1snNb3G51U99ZxGDosrIMrhi2Ov8dmAZD5NnOtrx9UR4Vm+dbUuUNLuZ/b2tkaYvvvSsg+DQ==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -1376,10 +1376,18 @@ packages:
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
 
+  memoize@10.1.0:
+    resolution: {integrity: sha512-MMbFhJzh4Jlg/poq1si90XRlTZRDHVqdlz2mPyGJ6kqMpyHUyVpDd5gpFAvVehW64+RA1eKE9Yt8aSLY7w2Kgg==}
+    engines: {node: '>=18'}
+
   mime@3.0.0:
     resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
     engines: {node: '>=10.0.0'}
     hasBin: true
+
+  mimic-function@5.0.1:
+    resolution: {integrity: sha512-VP79XUPxV2CigYP3jWwAUFSku2aKqBH7uTAapFWCBqutsbmDo96KY5o8uh6U+/YSIn5OxJnXp73beVkpqMIGhA==}
+    engines: {node: '>=18'}
 
   miniflare@3.20250204.0:
     resolution: {integrity: sha512-f7tezEkOvVRVHIVul2EbTyKvWJCXpTDRAOxTxtD4N92+YI8PC2P8AvO4Z30vlN61r5Pje33fTBG8G1fEwSZIqQ==}
@@ -1563,6 +1571,11 @@ packages:
 
   runed@0.28.0:
     resolution: {integrity: sha512-k2xx7RuO9hWcdd9f+8JoBeqWtYrm5CALfgpkg2YDB80ds/QE4w0qqu34A7fqiAwiBBSBQOid7TLxwxVC27ymWQ==}
+    peerDependencies:
+      svelte: ^5.7.0
+
+  runed@0.31.1:
+    resolution: {integrity: sha512-v3czcTnO+EJjiPvD4dwIqfTdHLZ8oH0zJheKqAHh9QMViY7Qb29UlAMRpX7ZtHh7AFqV60KmfxaJ9QMy+L1igQ==}
     peerDependencies:
       svelte: ^5.7.0
 
@@ -1861,7 +1874,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@dagrejs/dagre@1.1.4':
+  '@dagrejs/dagre@1.1.5':
     dependencies:
       '@dagrejs/graphlib': 2.2.4
 
@@ -2139,14 +2152,11 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@layerstack/svelte-actions@1.0.1-next.2':
+  '@layerstack/svelte-actions@1.0.1-next.14':
     dependencies:
       '@floating-ui/dom': 1.7.0
-      '@layerstack/utils': 1.1.0-next.2
-      d3-array: 3.2.4
+      '@layerstack/utils': 2.0.0-next.14
       d3-scale: 4.0.2
-      date-fns: 4.1.0
-      lodash-es: 4.17.21
 
   '@layerstack/svelte-actions@1.0.1-next.3':
     dependencies:
@@ -2157,9 +2167,9 @@ snapshots:
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/svelte-state@0.1.0-next.7':
+  '@layerstack/svelte-state@0.1.0-next.19':
     dependencies:
-      '@layerstack/utils': 2.0.0-next.3
+      '@layerstack/utils': 2.0.0-next.14
 
   '@layerstack/svelte-state@0.1.0-next.8':
     dependencies:
@@ -2182,16 +2192,13 @@ snapshots:
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/tailwind@2.0.0-next.4':
+  '@layerstack/tailwind@2.0.0-next.17':
     dependencies:
-      '@layerstack/utils': 1.1.0-next.2
+      '@layerstack/utils': 2.0.0-next.14
       clsx: 2.1.1
-      culori: 4.0.1
       d3-array: 3.2.4
-      date-fns: 4.1.0
       lodash-es: 4.17.21
       tailwind-merge: 3.3.0
-      tailwindcss: 4.1.7
 
   '@layerstack/tailwind@2.0.0-next.5':
     dependencies:
@@ -2204,10 +2211,11 @@ snapshots:
       tailwind-merge: 3.3.0
       tailwindcss: 4.1.7
 
-  '@layerstack/utils@1.1.0-next.2':
+  '@layerstack/utils@2.0.0-next.14':
     dependencies:
       d3-array: 3.2.4
-      date-fns: 4.1.0
+      d3-time: 3.1.0
+      d3-time-format: 4.1.0
       lodash-es: 4.17.21
 
   '@layerstack/utils@2.0.0-next.3':
@@ -2831,13 +2839,13 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  layerchart@2.0.0-next.11(svelte@5.33.1):
+  layerchart@2.0.0-next.39(svelte@5.33.1):
     dependencies:
-      '@dagrejs/dagre': 1.1.4
-      '@layerstack/svelte-actions': 1.0.1-next.2
-      '@layerstack/svelte-state': 0.1.0-next.7
-      '@layerstack/tailwind': 2.0.0-next.4
-      '@layerstack/utils': 2.0.0-next.3
+      '@dagrejs/dagre': 1.1.5
+      '@layerstack/svelte-actions': 1.0.1-next.14
+      '@layerstack/svelte-state': 0.1.0-next.19
+      '@layerstack/tailwind': 2.0.0-next.17
+      '@layerstack/utils': 2.0.0-next.14
       d3-array: 3.2.4
       d3-color: 3.1.0
       d3-delaunay: 6.0.4
@@ -2857,9 +2865,9 @@ snapshots:
       d3-shape: 3.2.0
       d3-tile: 1.0.0
       d3-time: 3.1.0
-      date-fns: 4.1.0
       lodash-es: 4.17.21
-      runed: 0.28.0(svelte@5.33.1)
+      memoize: 10.1.0
+      runed: 0.31.1(svelte@5.33.1)
       svelte: 5.33.1
 
   lightningcss-darwin-arm64@1.30.1:
@@ -2924,7 +2932,13 @@ snapshots:
 
   mdn-data@2.0.30: {}
 
+  memoize@10.1.0:
+    dependencies:
+      mimic-function: 5.0.1
+
   mime@3.0.0: {}
+
+  mimic-function@5.0.1: {}
 
   miniflare@3.20250204.0:
     dependencies:
@@ -3101,6 +3115,11 @@ snapshots:
       fsevents: 2.3.3
 
   runed@0.28.0(svelte@5.33.1):
+    dependencies:
+      esm-env: 1.2.2
+      svelte: 5.33.1
+
+  runed@0.31.1(svelte@5.33.1):
     dependencies:
       esm-env: 1.2.2
       svelte: 5.33.1

@@ -55,8 +55,6 @@
             class: 'fill-blue-500/10 stroke-none'
           },
           highlight: {
-            area: false,
-            lines: true,
             points: { class: 'fill-blue-500' }
           },
           tooltip: {
@@ -66,7 +64,7 @@
       >
         {#snippet tooltip({ context })}
           {@const data = context.tooltip.data}
-          <Tooltip.Root x="data" y="data">
+          <Tooltip.Root x="data" y="data" xOffset={8} yOffset={8}>
             <Tooltip.Header>{dateFormat(data.start_date, 'eee, MMMM do')}</Tooltip.Header>
             <Tooltip.List>
               <Tooltip.Item
